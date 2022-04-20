@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class IsStudent
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->user_role == 2) {
+        if (auth()->user()->user_role == 0) {
             return $next($request);
         } else {
-            return redirect("/dashboard")->with('error', "You don't have admin access.");
+            return redirect("/dashboard")->with('error', "You don't have student access.");
         }
     }
 }
