@@ -7,24 +7,19 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-   public function index()
-   {
-       if(Auth::user()->hasRole('student')){
-            return view('student');
-       }elseif(Auth::user()->hasRole('teacher')){
-            return view('teacher');
-       }elseif(Auth::user()->hasRole('admin')){
-        return view('admin');
-       }
-   }
+     public function __construct()
+     {
+          $this->middleware('auth');
+     }
 
-//    public function myprofile()
-//    {
-//     return view('myprofile');
-//    }
-
-//    public function postcreate()
-//    {
-//     return view('postcreate');
-//    }
+     public function index()
+     {
+          if (Auth::user()->user_role == 0) {
+               return Redirect('/student');
+          } elseif (Auth::user()->user_role == 1) {
+               return Redirect('/teacher');
+          } elseif (Auth::user()->user_role == 2) {
+               return Redirect('/admin');
+          }
+     }
 }
