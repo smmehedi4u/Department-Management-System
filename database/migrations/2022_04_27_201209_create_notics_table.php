@@ -13,7 +13,7 @@ class CreateNoticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notics', function (Blueprint $table) {
+        Schema::create('notices', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('details');
