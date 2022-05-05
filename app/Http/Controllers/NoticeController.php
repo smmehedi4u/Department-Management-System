@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\notic;
+use App\Models\Notice;
 use Illuminate\Http\Request;
 
-class NoticController extends Controller
+class NoticeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class NoticController extends Controller
      */
     public function index()
     {
-        //
+        $notices = Notice::all();
+        return view('notice.index', compact('notices'));
     }
 
     /**
@@ -24,7 +25,8 @@ class NoticController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('notice.create');
     }
 
     /**
@@ -44,7 +46,7 @@ class NoticController extends Controller
      * @param  \App\Models\notic  $notic
      * @return \Illuminate\Http\Response
      */
-    public function show(notic $notic)
+    public function show(Notice $notice)
     {
         //
     }
@@ -55,7 +57,7 @@ class NoticController extends Controller
      * @param  \App\Models\notic  $notic
      * @return \Illuminate\Http\Response
      */
-    public function edit(notic $notic)
+    public function edit(Notice $notice)
     {
         //
     }
@@ -64,10 +66,10 @@ class NoticController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\notic  $notic
+     * @param  \App\Models\Notice  $notic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, notic $notic)
+    public function update(Request $request, Notice $notice)
     {
         //
     }
@@ -78,7 +80,7 @@ class NoticController extends Controller
      * @param  \App\Models\notic  $notic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(notic $notic)
+    public function destroy(Notice $notice)
     {
         //
     }

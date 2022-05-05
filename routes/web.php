@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,8 @@ require __DIR__ . '/auth.php';
 
 Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/notice', [NoticeController::class, 'index'])->name('notice');
+    Route::get('/notice/create', [NoticeController::class, 'create'])->name('notice.create');
 });
 
 Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->group(function () {
