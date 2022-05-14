@@ -57,8 +57,8 @@ class NoticeController extends Controller
         $notice->title = $request->title;
         $notice->details = $request->body;
         if ($request->has("file")) {
-            $path = $request->file('file')->store('file');
-            $notice->file = $path->;
+            $path = $request->file('file')->store('files');
+            $notice->file = $path;
         }
         $notice->added_by = Auth::user()->id;
         $notice->save();
