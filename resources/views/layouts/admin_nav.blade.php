@@ -76,8 +76,8 @@
             <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('admin.notice')" :active="request()->routeIs('admin.notice')">
+                {{ __('Notice') }}
             </x-responsive-nav-link>
         </div>
 
