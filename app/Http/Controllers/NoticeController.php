@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Notice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class NoticeController extends Controller
 {
@@ -25,7 +27,6 @@ class NoticeController extends Controller
      */
     public function create()
     {
-
         return view('notice.create');
     }
 
@@ -37,7 +38,34 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'body' => 'required_without_all:file',
+            'file' => 'required_without_all:body',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $notice = new Notice();
+
+        $notice->title = $request->title;
+        $notice->details = $request->body;
+        if ($request->has("file")) {
+            $path = $request->file('file')->store('file');
+            $notice->file = $path->;
+        }
+        $notice->added_by = Auth::user()->id;
+        $notice->save();
+
+        $request->session()->flash('success', 'Notice added successfully!');
+
+        return back();
     }
 
     /**
