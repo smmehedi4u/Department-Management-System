@@ -14,7 +14,8 @@ class ResultController extends Controller
      */
     public function index()
     {
-        //
+        $results = Result::all();
+        return view('result.index', compact('results'));
     }
 
     /**

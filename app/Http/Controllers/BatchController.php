@@ -14,7 +14,8 @@ class BatchController extends Controller
      */
     public function index()
     {
-        //
+        $batchs = Batch::all();
+        return view('batch.index', compact('batchs'));
     }
 
     /**

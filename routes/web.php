@@ -37,3 +37,5 @@ Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->
 Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->group(function () {
     Route::view('/', "student.student_home")->name('home');
 });
+
+Route::get('/notice', [NoticeController::class, 'index']);
