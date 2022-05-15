@@ -26,8 +26,13 @@ require __DIR__ . '/auth.php';
 
 Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('/notice', [NoticeController::class, 'index'])->name('notice');
-    Route::get('/notice/create', [NoticeController::class, 'create'])->name('notice.create');
+
+    //Notice
+    Route::name("notice.")->prefix('notice')->group(function () {
+        Route::get('/', [NoticeController::class, 'index'])->name('index');
+        Route::get('/create', [NoticeController::class, 'create'])->name('create');
+        Route::post('/create', [NoticeController::class, 'store'])->name('store');
+    });
 });
 
 Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->group(function () {
@@ -37,5 +42,3 @@ Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->
 Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->group(function () {
     Route::view('/', "student.student_home")->name('home');
 });
-
-Route::get('/notice', [NoticeController::class, 'index']);

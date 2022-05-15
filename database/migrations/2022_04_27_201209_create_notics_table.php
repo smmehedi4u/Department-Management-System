@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateNoticsTable extends Migration
@@ -16,10 +17,11 @@ class CreateNoticsTable extends Migration
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('details');
+            $table->string('details')->nullable();
             $table->binary('file')->nullable();
-            $table->date('date');
+            $table->date('date')->default(DB::raw('NOW()'));
             $table->integer('added_by');
+            $table->timestamps();
         });
     }
 
