@@ -32,7 +32,7 @@
                                         Batch
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Result
+                                        Result Type
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <span class="sr-only">Action</span>

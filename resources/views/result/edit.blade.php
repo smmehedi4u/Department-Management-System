@@ -30,7 +30,7 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="date" value="{{ $result->date }}"
+                            <label for="date" 
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('title') text-red-600 @enderror">
                                 Select date
                             </label>
@@ -66,11 +66,11 @@ selected
                         </div>
 
                         <div class="mb-6">
-                            <label for="result_type" value="{{ $result->result_type }}"
+                            <label for="result_type"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
                                 Result
                             </label>
-                            <input autofocus="true" type="integer" id="result_type" name="result_type" value="{{ $result->result_type }}"
+                            <input autofocus="true" type="text" id="result_type" name="result_type" value="{{ $result->result_type }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('result_type') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter result type" required="">
 
