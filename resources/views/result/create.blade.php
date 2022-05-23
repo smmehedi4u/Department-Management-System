@@ -20,7 +20,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('file') text-red-600 @enderror"
                                 for="user_avatar">Upload
                                 file</label>
-                            <input name="file" 
+                            <input name="file"
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none @error('file') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror"
                                 aria-describedby="user_avatar_help" id="file" type="file">
 
@@ -51,10 +51,14 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
                                 Batch
                             </label>
-                            <input autofocus="true" type="integer" id="batch_id" name="batch_id" value="{{ old('batch_id') }}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                placeholder="Enter batch id" required="">
+                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                            name="batch_id" id="" required>
+                            <option value="">Select Batch</option>
 
+                            @foreach ($batches as $batch)
+<option value="{{$batch->id}}">{{$batch->name}}</option>
+                            @endforeach
+                        </select>
                             @error('batch_id')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Error!</span> {{ $message }}</p>
@@ -66,7 +70,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
                                 Result
                             </label>
-                            <input autofocus="true" type="integer" id="result_type" name="result_type" value="{{ old('result_type') }}"
+                            <input type="integer" id="result_type" name="result_type" value="{{ old('result_type') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('result_type') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter result type" required="">
 

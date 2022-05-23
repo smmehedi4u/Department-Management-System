@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Result;
+use App\Models\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +17,7 @@ class ResultController extends Controller
      */
     public function index()
     {
-        $results = Result::all();
+        $results = Result::join("batches","batches.id","=","results.batch_id")->select("results.*", "batches.name as batch_name")->get();
         return view('result.index', compact('results'));
     }
 
@@ -27,7 +28,8 @@ class ResultController extends Controller
      */
     public function create()
     {
-        return view('result.create');
+        $batches = Batch::all();
+        return view('result.create',compact('batches'));
     }
 
     /**
@@ -93,7 +95,8 @@ class ResultController extends Controller
     public function edit(result $result,$id)
     {
         $result = Result::find($id);
-        return view('result.edit', compact('result'));
+        $batches = Batch::all();
+        return view('result.edit', compact('result','batches'));
     }
 
     /**

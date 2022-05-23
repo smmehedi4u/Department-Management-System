@@ -2,7 +2,7 @@
     <x-slot name="title">
         Edit Result
     </x-slot>
-    <x-slot name="header"> 
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Edit Result') }}
         </h2>
@@ -47,14 +47,18 @@
 
 
                         <div class="mb-6">
-                            <label for="batch_id" value="{{ $result->batch_id }}"
+                            <label for="batch_id"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
                                 Batch
                             </label>
-                            <input autofocus="true" type="integer" id="batch_id" name="batch_id" value="{{ $result->batch_id }}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                placeholder="Enter batch id" required="">
-
+                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                            name="batch_id" id="" required>
+                            @foreach ($batches as $batch)
+                                <option @if ($result->batch_id==$batch->id)
+selected
+                                @endif value="{{$batch->id}}">{{$batch->name}}</option>
+                            @endforeach
+                        </select>
                             @error('batch_id')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Error!</span> {{ $message }}</p>
