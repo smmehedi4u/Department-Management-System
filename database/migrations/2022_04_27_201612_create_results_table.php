@@ -18,8 +18,9 @@ class CreateResultsTable extends Migration
             $table->binary('file')->nullable();
             $table->date('date');
             $table->integer('batch_id');
-            $table->integer('result_type');
+            $table->string('result_type');
             $table->integer('added_by');
+            $table->timestamps();
         });
     }
 

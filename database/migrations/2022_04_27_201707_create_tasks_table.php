@@ -20,6 +20,7 @@ class CreateTasksTable extends Migration
             $table->text('details');
             $table->integer('end_date');
             $table->integer('added_by');
+            $table->timestamps();
         });
     }
 

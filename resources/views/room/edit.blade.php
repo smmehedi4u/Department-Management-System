@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="title">
-        Add Room
+        Edit Room
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Room') }}
+            {{ __('Edit Room') }}
         </h2>
     </x-slot>
 
@@ -15,13 +15,12 @@
 
                     <form :action=" route('admin.room.store')" method="post" enctype="multipart/form-data">
                         @csrf
-
                         <div class="mb-6">
-                            <label for="room" value="{{ old('room_no') }}"
+                            <label for="room" value="{{ $room->room_no }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('room_no') text-red-600 @enderror">
                                 Room No
                             </label>
-                            <input autofocus="true" type="integer" id="room_no" name="room_no" value="{{ old('room_no') }}"
+                            <input autofocus="true" type="integer" id="room_no" name="room_no" value="{{ $room->room_no }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('room_no') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter room no" required="">
 
@@ -31,11 +30,11 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="allotment" value="{{ old('allotment_for') }}"
+                            <label for="allotment" value="{{ $room->allotment_for }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('allotment_for') text-red-600 @enderror">
                                 Allotment
                             </label>
-                            <input autofocus="true" type="integer" id="allotment_for" name="allotment_for" value="{{ old('allotment_for') }}"
+                            <input autofocus="true" type="integer" id="allotment_for" name="allotment_for" value="{{ $room->allotment_for }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('allotment_for') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter allotment here" required="">
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\event;
+use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
@@ -25,7 +27,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('event.create');
     }
 
     /**
@@ -36,7 +38,37 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'details' => 'required_without_all:file',
+            'file' => 'required_without_all:body',
+            'date' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $event = new Event();
+
+        $event->title = $request->title;
+        $event->details = $request->details;
+        if ($request->has("file")) {
+            $path = $request->file('file')->store('files');
+            $event->file = $path;
+        }
+
+        $event->date = $request->date;
+        $event->added_by = Auth::user()->id;
+        $event->save();
+
+        $request->session()->flash('success', 'Event added successfully!');
+
+        return back();
     }
 
     /**
@@ -56,9 +88,10 @@ class EventController extends Controller
      * @param  \App\Models\event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(event $event)
+    public function edit(event $event,$id)
     {
-        //
+        $event = Event::find($id);
+        return view('event.edit' ,compact('event'));
     }
 
     /**
@@ -68,9 +101,36 @@ class EventController extends Controller
      * @param  \App\Models\event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, event $event)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'details' => 'required_without_all:file',
+            'file' => 'required_without_all:body',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $event = Event::find($id);
+
+        $event->title = $request->title;
+        $event->details = $request->details;
+        if ($request->has("file")) {
+            $path = $request->file('file')->store('files');
+            $event->file = $path;
+        }
+
+        $event->date = $request->date;
+        $event->added_by = Auth::user()->id;
+        $event->save();
+
+        return redirect()->route('admin.event.index')->with('success','Event update successfully');
     }
 
     /**
@@ -79,8 +139,10 @@ class EventController extends Controller
      * @param  \App\Models\event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(event $event)
+    public function destroy(event $event,$id)
     {
-        //
+        $event = Event::find($id);
+        $event->delete();
+        return redirect()->route('admin.event.index')->with('success','Event has been delete successfully');
     }
 }

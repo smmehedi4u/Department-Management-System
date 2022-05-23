@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\batch;
+use App\Models\Batch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class BatchController extends Controller
 {
@@ -15,7 +17,7 @@ class BatchController extends Controller
     public function index()
     {
         $batchs = Batch::all();
-        return view('batch.index', compact('batchs'));
+        return view('batch.index', compact('batchs')); 
     }
 
     /**
@@ -25,7 +27,7 @@ class BatchController extends Controller
      */
     public function create()
     {
-        //
+        return view('batch.create');
     }
 
     /**
@@ -36,7 +38,27 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'session' => 'required',
+            'name' => 'required|max:50',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $batch = new Batch();
+
+        $batch->session = $request->session;
+        $batch->name = $request->name;
+        $batch->added_by = Auth::user()->id;
+        $batch->save();
+
+        $request->session()->flash('success', 'Batch added successfully!');
+
+        return back();
     }
 
     /**
@@ -47,7 +69,7 @@ class BatchController extends Controller
      */
     public function show(batch $batch)
     {
-        //
+        return view('batch.show',compact('batchs'));
     }
 
     /**
@@ -56,9 +78,10 @@ class BatchController extends Controller
      * @param  \App\Models\batch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function edit(batch $batch)
+    public function edit(Batch $batch,$id)
     {
-        //
+        $batch = Batch::find($id);
+        return view('batch.edit',compact('batch'));
     }
 
     /**
@@ -68,9 +91,29 @@ class BatchController extends Controller
      * @param  \App\Models\batch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, batch $batch)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'session' => 'required',
+            'name' => 'required|max:50',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $batch = Batch::find($id);
+
+        $batch->session = $request->session;
+        $batch->name = $request->name;
+        $batch->added_by = Auth::user()->id;
+        $batch->save();
+
+        $request->session()->flash('success', 'Batch update successfully!');
+
+        return back();
     }
 
     /**
@@ -79,8 +122,11 @@ class BatchController extends Controller
      * @param  \App\Models\batch  $batch
      * @return \Illuminate\Http\Response
      */
-    public function destroy(batch $batch)
+    public function destroy($id)
     {
-        //
+        $batch = Batch::find($id);
+        $batch->delete();
+        return redirect()->route('admin.batch.index')->with('success','Batch has been deleted successfully');
+    
     }
 }

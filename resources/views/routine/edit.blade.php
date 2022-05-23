@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="title">
-        Add Routine
+        Edit Routine
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Routine') }}
+            {{ __('Edit Routine') }}
         </h2>
     </x-slot>
 
@@ -16,11 +16,11 @@
                     <form :action=" route('admin.routine.store')" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-6">
-                            <label for="batch_id" value="{{ old('batch_id') }}"
+                            <label for="batch_id" value="{{ $routine->batch_id }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
-                                Batch ID
+                                Batch
                             </label>
-                            <input autofocus="true" type="integer" id="batch_id" name="batch_id" value="{{ old('batch_id') }}"
+                            <input autofocus="true" type="integer" id="batch_id" name="batch_id" value="{{ $routine->batch_id }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter batch id" required="">
 
@@ -30,11 +30,11 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="subject_id" value="{{ old('subject_id') }}"
+                            <label for="subject_id" value="{{ $routine->subject_id }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
-                                Subject ID
+                                Course
                             </label>
-                            <input autofocus="true" type="integer" id="subject_id" name="subject_id" value="{{ old('subject_id') }}"
+                            <input autofocus="true" type="integer" id="subject_id" name="subject_id" value="{{ $routine->subject_id }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('subject_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter batch id" required="">
 
@@ -44,11 +44,11 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="teacher_id" value="{{ old('teacher_id') }}"
+                            <label for="teacher_id" value="{{ $routine->teacher_id }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('teacher_id') text-red-600 @enderror">
-                                Teacher ID
+                                Teacher
                             </label>
-                            <input autofocus="true" type="integer" id="teacher_id" name="teacher_id" value="{{ old('teacher_id') }}"
+                            <input autofocus="true" type="integer" id="teacher_id" name="teacher_id" value="{{ $routine->teacher_id }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('teacher_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter teacher id" required="">
 
@@ -58,11 +58,11 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="day" value="{{ old('day') }}"
+                            <label for="day" value="{{ $routine->day }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('day') text-red-600 @enderror">
                                 Day
                             </label>
-                            <input autofocus="true" type="day" id="day" name="day" value="{{ old('day') }}"
+                            <input autofocus="true" type="day" id="day" name="day" value="{{ $routine->day }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                  placeholder="Enter day" required="">
 
@@ -75,11 +75,11 @@
 
 
                         <div class="mb-6">
-                            <label for="from_time" value="{{ old('from_time') }}"
+                            <label for="from_time" value="{{ $routine->from_time }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('from_time') text-red-600 @enderror">
                                 Start
                             </label>
-                            <input autofocus="true" type="time" id="from_time" name="from_time" value="{{ old('from_time') }}"
+                            <input autofocus="true" type="time" id="from_time" name="from_time" value="{{ $routine->from_time }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('from_time') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter start time" required="">
 
@@ -90,11 +90,11 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="to_time" value="{{ old('to_time') }}"
+                            <label for="to_time" value="{{ $routine->to_time }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('to_time') text-red-600 @enderror">
                                 End
                             </label>
-                            <input autofocus="true" type="time" id="to_time" name="to_time" value="{{ old('to_time') }}"
+                            <input autofocus="true" type="time" id="to_time" name="to_time" value="{{ $routine->to_time }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('to_time') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter result type" required="">
 

@@ -5,6 +5,9 @@
         </h2>
     </x-slot>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -20,16 +23,13 @@
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        Product name
+                                        Title
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Color
+                                        Details
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Category
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Price
+                                        File
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <span class="sr-only">Edit</span>
@@ -37,57 +37,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b  ">
+                            @foreach ($notices as $notice)
+                                <tr class="bg-white border-b  "> 
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        Apple MacBook Pro 17"
+                                       {{ $notice->title }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        Sliver
+                                    {{ $notice->details }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        Laptop
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
+                                    {{ $notice->file }}
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>
+                                    <form action="{{ route('admin.notice.destroy',$notice->id) }}" method="post">
+                                        <a href="{{ route('admin.notice.edit',$notice->id) }}" class="btn btn-success">Edit</a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
-                                <tr class="bg-white border-b  ">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900  whitespace-nowrap">
-                                        Microsoft Surface Pro
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        White
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Laptop PC
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $1999
-                                    </td>
-                                    <td class="px-6 py-4 text-right">
-                                        <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white ">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900  whitespace-nowrap">
-                                        Magic Mouse 2
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        Black
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Accessories
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $99
-                                    </td>
-                                    <td class="px-6 py-4 text-right">
-                                        <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

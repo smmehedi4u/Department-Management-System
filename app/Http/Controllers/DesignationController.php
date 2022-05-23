@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\designation;
+use App\Models\Designation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DesignationController extends Controller
 {
@@ -19,13 +21,13 @@ class DesignationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource. 
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('designation.create');
     }
 
     /**
@@ -36,7 +38,28 @@ class DesignationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $designation = new Designation();
+
+        $designation->title = $request->title;
+        $designation->added_by = Auth::user()->id;
+        $designation->save();
+
+        $request->session()->flash('success', 'Designation added successfully!');
+
+        return back();
+
     }
 
     /**
@@ -47,7 +70,7 @@ class DesignationController extends Controller
      */
     public function show(designation $designation)
     {
-        //
+        return view('designation.show',compact('designation'));
     }
 
     /**
@@ -56,9 +79,11 @@ class DesignationController extends Controller
      * @param  \App\Models\designation  $designation
      * @return \Illuminate\Http\Response
      */
-    public function edit(designation $designation)
+    public function edit(Designation $designation,$id)
     {
-        //
+        $designation = Designation::find($id);
+        return view('designation.edit',compact('designation'));
+        //return view('designation.edit',compact('designation'));
     }
 
     /**
@@ -68,9 +93,27 @@ class DesignationController extends Controller
      * @param  \App\Models\designation  $designation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, designation $designation)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $designation = Designation::find($id);
+
+        $designation->title = $request->title;
+        $designation->added_by = Auth::user()->id;
+        $designation->save();
+
+        return redirect()->route('admin.designation.index')->with('success','Designation update successfully');
     }
 
     /**
@@ -79,8 +122,10 @@ class DesignationController extends Controller
      * @param  \App\Models\designation  $designation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(designation $designation)
+    public function destroy(designation $designation,$id)
     {
-        //
+        $designation = Designation::find($id);
+        $designation->delete();
+        return redirect()->route('admin.designation.index')->with('success','Designation has been deleted successfully');
     }
 }

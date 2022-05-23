@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="title">
-        Add Event
+        Edit Event
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Event') }}
+            {{ __('Edit Event') }}
         </h2>
     </x-slot>
 
@@ -16,13 +16,13 @@
                     <form :action=" route('admin.event.store')" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-6">
-                            <label for="title" value="{{ old('title') }}"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('title') text-red-600 @enderror">
+                            <label for="event" value="{{ $event->title }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 @error('event') text-red-600 @enderror">
                                 Event Title
                             </label>
-                            <input autofocus="true" type="text" id="title" name="title" value="{{ old('title') }}"
+                            <input autofocus="true" type="text" id="title" name="title" value="{{ $event->title }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('title') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                placeholder="Enter Title Here" required="">
+                                 required="">
 
                             @error('title')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
@@ -30,14 +30,13 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="message"
+                            <label for="details"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400 @error('details') text-red-600 @enderror">
                                 Event Details
                             </label>
-                            <textarea id="message" name="details" rows="4"
-                                class="
-                                block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('details') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror "
-                                placeholder="Details">{{ old('details') }}</textarea>
+                            <textarea id="details" name="details" rows="4"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('details') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror "
+                                > {{ $event->details  }} </textarea>
 
                             @error('details')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
@@ -49,7 +48,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('file') text-red-600 @enderror"
                                 for="user_avatar">Upload
                                 file</label>
-                            <input name="file"
+                            <input name="file" value="{{ $event->file }}"
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none @error('file') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror"
                                 aria-describedby="user_avatar_help" id="file" type="file">
 
@@ -58,15 +57,14 @@
                                         class="font-medium">Error!</span> {{ $message }}</p>
                             @enderror
                         </div>
-
                         <div class="mb-6">
-                            <label for="date" value="{{ old('date') }}"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
+                            <label for="date" value="{{ $event->date }}"
+                                class="block mb-2 text-sm font-medium text-gray-900 @error('event') text-red-600 @enderror">
                                 Date
                             </label>
-                            <input autofocus="true" type="date" id="date" name="date" value="{{ old('date') }}"
+                            <input autofocus="true" type="date" id="date" name="date" value="{{ $event->date }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('date') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                placeholder="Enter date Here" required="">
+                                 required="">
 
                             @error('date')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span

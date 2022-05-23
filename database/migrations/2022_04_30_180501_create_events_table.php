@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->binary('file')->nullable();
             $table->date('date');
             $table->integer('added_by');
+            $table->timestamps();
         });
     }
 
@@ -28,7 +29,7 @@ class CreateEventsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down() 
     {
         Schema::dropIfExists('events');
     }
