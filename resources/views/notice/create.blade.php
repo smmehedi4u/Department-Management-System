@@ -28,7 +28,7 @@
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Error!</span> {{ $message }}</p>
                             @enderror
-                        </div>
+                        </div> 
                         <div class="mb-6">
                             <label for="message"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400 @error('body') text-red-600 @enderror">

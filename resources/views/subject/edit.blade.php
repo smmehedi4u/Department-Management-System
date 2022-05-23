@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="title">
-        Add Subject
+        Edit Subject
     </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Subject') }}
+            {{ __('Edit Subject') }}
         </h2>
     </x-slot>
 
@@ -16,11 +16,11 @@
                     <form :action=" route('admin.subject.store')" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-6">
-                            <label for="name" value="{{ old('name') }}"
+                            <label for="name" value="{{ $subject->name }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('name') text-red-600 @enderror">
                                 Course
                             </label>
-                            <input autofocus="true" type="string" id="name" name="name" value="{{ old('name') }}"
+                            <input autofocus="true" type="string" id="name" name="name" value="{{ $subject->name }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter course name" required="">
 
@@ -31,11 +31,11 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="course_code" value="{{ old('course_code') }}"
+                            <label for="course_code" value="{{ $subject->course_code }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('course_code') text-red-600 @enderror">
                                 Code
                             </label>
-                            <input autofocus="true" type="string" id="course_code" name="course_code" value="{{ old('course_code') }}"
+                            <input autofocus="true" type="string" id="course_code" name="course_code" value="{{ $subject->course_code }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('course_code') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter course code" required="">
 
@@ -46,11 +46,11 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="semester" value="{{ old('semester') }}"
+                            <label for="semester" value="{{ $subject->semester }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('semester') text-red-600 @enderror">
                                 Semester
                             </label>
-                            <input autofocus="true" type="integer" id="semester" name="semester" value="{{ old('semester') }}"
+                            <input autofocus="true" type="integer" id="semester" name="semester" value="{{ $subject->semester }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('semester') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 placeholder="Enter semester no" required="">
 

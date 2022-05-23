@@ -2,7 +2,15 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BatchController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ResultController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +40,91 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(
         Route::get('/', [NoticeController::class, 'index'])->name('index');
         Route::get('/create', [NoticeController::class, 'create'])->name('create');
         Route::post('/create', [NoticeController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [NoticeController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [NoticeController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [NoticeController::class, 'update'])->name('update');
     });
+
+    //Batch
+    Route::name("batch.")->prefix('batch')->group(function () {
+        Route::get('/', [BatchController::class, 'index'])->name('index');
+        Route::get('/create', [BatchController::class, 'create'])->name('create');
+        Route::post('/create', [BatchController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [BatchController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [BatchController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [BatchController::class, 'update'])->name('update');
+    });
+
+    //Designation
+    Route::name("designation.")->prefix('designation')->group(function () {
+        Route::get('/', [DesignationController::class, 'index'])->name('index');
+        Route::get('/create', [DesignationController::class, 'create'])->name('create');
+        Route::post('/create', [DesignationController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [DesignationController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [DesignationController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [DesignationController::class, 'update'])->name('update');
+    });
+
+    //Event
+    Route::name("event.")->prefix('event')->group(function () {
+        Route::get('/', [EventController::class, 'index'])->name('index');
+        Route::get('/create', [EventController::class, 'create'])->name('create');
+        Route::post('/create', [EventController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [EventController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [EventController::class, 'update'])->name('update');
+    });
+
+    //Result
+    Route::name("result.")->prefix('result')->group(function () {
+        Route::get('/', [ResultController::class, 'index'])->name('index');
+        Route::get('/create', [ResultController::class, 'create'])->name('create');
+        Route::post('/create', [ResultController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [ResultController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [ResultController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [ResultController::class, 'update'])->name('update');
+    });
+
+    //Room
+    Route::name("room.")->prefix('room')->group(function () {
+        Route::get('/', [RoomController::class, 'index'])->name('index');
+        Route::get('/create', [RoomController::class, 'create'])->name('create');
+        Route::post('/create', [RoomController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [RoomController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [RoomController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [RoomController::class, 'update'])->name('update');
+    });
+
+    //Routine
+    Route::name("routine.")->prefix('routine')->group(function () {
+        Route::get('/', [RoutineController::class, 'index'])->name('index');
+        Route::get('/create', [RoutineController::class, 'create'])->name('create');
+        Route::post('/create', [RoutineController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [RoutineController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [RoutineController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [RoutineController::class, 'update'])->name('update');
+    });
+
+    //Subject
+    Route::name("subject.")->prefix('subject')->group(function () {
+        Route::get('/', [SubjectController::class, 'index'])->name('index');
+        Route::get('/create', [SubjectController::class, 'create'])->name('create');
+        Route::post('/create', [SubjectController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [SubjectController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [SubjectController::class, 'update'])->name('update');
+    });
+
+    //Task
+    Route::name("task.")->prefix('task')->group(function () {
+        Route::get('/', [TaskController::class, 'index'])->name('index');
+        Route::get('/create', [TaskController::class, 'create'])->name('create');
+        Route::post('/create', [TaskController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
+    });
+
 });
 
 Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->group(function () {

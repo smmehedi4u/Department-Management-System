@@ -18,6 +18,30 @@
                     <x-nav-link :href="route('admin.notice.index')" :active="request()->routeIs('admin.notice.index')">
                         {{ __('Notice') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.batch.index')" :active="request()->routeIs('admin.batch.index')">
+                        {{ __('Batch') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.designation.index')" :active="request()->routeIs('admin.designation.index')">
+                        {{ __('Designation') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.event.index')" :active="request()->routeIs('admin.event.index')">
+                        {{ __('Event') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.result.index')" :active="request()->routeIs('admin.result.index')">
+                        {{ __('Result') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.room.index')" :active="request()->routeIs('admin.room.index')">
+                        {{ __('Room') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.routine.index')" :active="request()->routeIs('admin.routine.index')">
+                        {{ __('Routine') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.subject.index')" :active="request()->routeIs('admin.subject.index')">
+                        {{ __('Subject') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.task.index')" :active="request()->routeIs('admin.task.index')">
+                        {{ __('Task') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -78,6 +102,30 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.notice.index')" :active="request()->routeIs('admin.notice.index')">
                 {{ __('Notice') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.batch.index')" :active="request()->routeIs('admin.batch.index')">
+                {{ __('Batch') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.designation.index')" :active="request()->routeIs('admin.designation.index')">
+                {{ __('Designation') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.event.index')" :active="request()->routeIs('admin.event.index')">
+                {{ __('Event') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.result.index')" :active="request()->routeIs('admin.result.index')">
+                {{ __('Result') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.room.index')" :active="request()->routeIs('admin.room.index')">
+                {{ __('Room') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.routine.index')" :active="request()->routeIs('admin.routine.index')">
+                {{ __('Routine') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.subject.index')" :active="request()->routeIs('admin.subject.index')">
+                {{ __('Subject') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.task.index')" :active="request()->routeIs('admin.task.index')">
+                {{ __('Task') }}
             </x-responsive-nav-link>
         </div>
 

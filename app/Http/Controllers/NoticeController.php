@@ -76,7 +76,7 @@ class NoticeController extends Controller
      */
     public function show(Notice $notice)
     {
-        //
+        return view('notice.show',compact('notices'));
     }
 
     /**
@@ -85,9 +85,12 @@ class NoticeController extends Controller
      * @param  \App\Models\notic  $notic
      * @return \Illuminate\Http\Response
      */
-    public function edit(Notice $notice)
+    public function edit(Notice $notice,$id)
     {
-        //
+
+        $notice = Notice::find($id);
+        return view('notice.edit',compact('notice'));
+        //return view('notice.edit',compact('notice'));
     }
 
     /**
@@ -97,9 +100,36 @@ class NoticeController extends Controller
      * @param  \App\Models\Notice  $notic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Notice $notice)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'body' => 'required_without_all:file',
+            'file' => 'required_without_all:body',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)  
+                ->withInput();
+        }
+
+
+
+        $notice = Notice::find($id);
+
+        $notice->title = $request->title;
+        $notice->details = $request->body;
+        if ($request->has("file")) {
+            $path = $request->file('file')->store('files');
+            $notice->file = $path;
+        }
+        $notice->added_by = Auth::user()->id;
+        $notice->save();
+
+        $request->session()->flash('success', 'Notice update successfully!');
+
+        return back();
     }
 
     /**
@@ -108,8 +138,10 @@ class NoticeController extends Controller
      * @param  \App\Models\notic  $notic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notice $notice)
+    public function destroy($id)
     {
-        //
+        $notice = Notice::find($id);
+        $notice->delete();
+        return redirect()->route('admin.notice.index')->with('success','Notice has been deleted successfully');
     }
 }

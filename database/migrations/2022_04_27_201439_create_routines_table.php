@@ -21,7 +21,8 @@ class CreateRoutinesTable extends Migration
             $table->string('day');
             $table->time('from_time');
             $table->time('to_time');
-            $table->integer('added_by');
+            $table->integer('added_by'); 
+            $table->timestamps();
         });
     }
 

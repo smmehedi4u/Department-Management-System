@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\task;
+use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
@@ -25,7 +27,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('task.create');
     }
 
     /**
@@ -36,7 +38,34 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'subject_id' => 'required',
+            'batch_id' => 'required',
+            'details' => 'required',
+            'end_date' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $task = new Task();
+
+        $task->subject_id = $request->subject_id;
+        $task->batch_id = $request->batch_id;
+        $task->details = $request->details;
+        $task->end_date = $request->end_date;
+
+        $task->added_by = Auth::user()->id;
+        $task->save();
+
+        $request->session()->flash('success', 'Task added successfully!');
+
+        return back();
     }
 
     /**
@@ -56,9 +85,10 @@ class TaskController extends Controller
      * @param  \App\Models\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(task $task)
+    public function edit(task $task,$id)
     {
-        //
+        $task = Task::find($id);
+        return view('task.edit', compact('task'));
     }
 
     /**
@@ -68,9 +98,34 @@ class TaskController extends Controller
      * @param  \App\Models\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, task $task)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'subject_id' => 'required',
+            'batch_id' => 'required',
+            'details' => 'required',
+            'end_date' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $task = Task::find($id);
+
+        $task->subject_id = $request->subject_id;
+        $task->batch_id = $request->batch_id;
+        $task->details = $request->details;
+        $task->end_date = $request->end_date;
+
+        $task->added_by = Auth::user()->id;
+        $task->save();
+
+        return redirect()->route('admin.task.index')->with('success','Task update successfully');
     }
 
     /**
@@ -79,8 +134,10 @@ class TaskController extends Controller
      * @param  \App\Models\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(task $task)
+    public function destroy(task $task,$id)
     {
-        //
+        $task = Task::find($id);
+        $task->delete();
+        return redirect()->route('admin.task.index')->with('success','Task delete successfully');
     }
 }

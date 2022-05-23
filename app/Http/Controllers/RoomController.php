@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\room;
+use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
 {
@@ -25,7 +27,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        return view('room.create');
     }
 
     /**
@@ -36,7 +38,30 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'room_no' => 'required',
+            'allotment_for' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $room = new Room();
+
+        $room->room_no = $request->room_no;
+        $room->allotment_for = $request->allotment_for;
+
+        $room->added_by = Auth::user()->id;
+        $room->save();
+
+        $request->session()->flash('success', 'Room added successfully!');
+
+        return back();
     }
 
     /**
@@ -56,9 +81,10 @@ class RoomController extends Controller
      * @param  \App\Models\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function edit(room $room)
+    public function edit(room $room,$id)
     {
-        //
+        $room = Room::find($id);
+        return view('room.edit', compact('room'));
     }
 
     /**
@@ -68,9 +94,30 @@ class RoomController extends Controller
      * @param  \App\Models\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, room $room)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'room_no' => 'required',
+            'allotment_for' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $room = Room::find($id);
+
+        $room->room_no = $request->room_no;
+        $room->allotment_for = $request->allotment_for;
+
+        $room->added_by = Auth::user()->id;
+        $room->save();
+
+        return redirect()->route('admin.room.index')->with('success','Room update successfully');
     }
 
     /**
@@ -79,8 +126,10 @@ class RoomController extends Controller
      * @param  \App\Models\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function destroy(room $room)
+    public function destroy(room $room,$id)
     {
-        //
+        $room = Room::find($id);
+        $room->delete();
+        return redirect()->route('admin.room.index')->with('success','Room has been delete successfully');
     }
 }

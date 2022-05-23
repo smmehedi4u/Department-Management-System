@@ -17,16 +17,16 @@ class CreateNoticsTable extends Migration
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('details')->nullable();
+            $table->string('details')->nullable(); 
             $table->binary('file')->nullable();
             $table->date('date')->default(DB::raw('NOW()'));
-            $table->integer('added_by');
+            $table->integer('added_by'); 
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. 
      *
      * @return void
      */

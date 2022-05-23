@@ -20,6 +20,7 @@ class CreateResultsTable extends Migration
             $table->integer('batch_id');
             $table->integer('result_type');
             $table->integer('added_by');
+            $table->timestamps(); 
         });
     }
 

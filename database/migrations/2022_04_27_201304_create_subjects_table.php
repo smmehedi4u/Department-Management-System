@@ -18,7 +18,8 @@ class CreateSubjectsTable extends Migration
             $table->string('name');
             $table->string('course_code');
             $table->integer('semester');
-            $table->integer('added_by');
+            $table->integer('added_by'); 
+            $table->timestamps();
         });
     }
 
