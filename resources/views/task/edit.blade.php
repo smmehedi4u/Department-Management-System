@@ -18,11 +18,16 @@
                         <div class="mb-6">
                             <label for="subject_id" value="{{ $task->subject_id }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('subject_id') text-red-600 @enderror">
-                                Subject ID
+                                Subject
                             </label>
-                            <input autofocus="true" type="integer" id="subject_id" name="subject_id" value="{{ $task->subject_id }}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                placeholder="Enter teacher id" required="">
+                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                            name="subject_id" id="" required>
+                            @foreach ($subjects as $subject)
+                                <option @if ($task->subject_id==$subject->id)
+
+                                @endif value="{{$subject->id}}">{{$subject->name}}</option>
+                            @endforeach
+                        </select>
 
                             @error('subject_id')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
@@ -33,11 +38,16 @@
                         <div class="mb-6">
                             <label for="batch_id" value="{{ $task->batch_id }}"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('batch_id') text-red-600 @enderror">
-                                Batch ID
+                                Batch
                             </label>
-                            <input autofocus="true" type="integer" id="batch_id" name="batch_id" value="{{ $task->batch_id }}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('result_type') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                placeholder="Enter batch id" required="">
+                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                            name="batch_id" id="" required>
+                            @foreach ($batches as $batch)
+                                <option @if ($task->batch_id==$batch->id)
+                            selected
+                                @endif value="{{$batch->id}}">{{$batch->name}}</option>
+                            @endforeach
+                        </select>
 
                             @error('result_type')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span

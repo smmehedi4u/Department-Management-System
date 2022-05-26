@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Routine;
+use App\Models\Batch;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -12,11 +14,11 @@ class RoutineController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function index()
     {
-        $routines = Routine::all();
+        $routines = Routine::join("batches","batches.id","=","routines.batch_id")->join("subjects","subjects.id","=","routines.subject_id")->select("routines.*", "batches.name as batch_name","subjects.name as sub_name")->get();
         return view('routine.index', compact('routines'));
     }
 
@@ -27,7 +29,9 @@ class RoutineController extends Controller
      */
     public function create()
     {
-        return view('routine.create');
+        $batches = Batch::all();
+        $subjects = Subject::all();
+        return view('routine.create',compact('batches','subjects'));
     }
 
     /**
@@ -92,7 +96,9 @@ class RoutineController extends Controller
     public function edit(routine $routine,$id)
     {
         $routine = Routine::find($id);
-        return view('routine.edit', compact('routine'));
+        $batches = Batch::all();
+        $subjects = Subject::all();
+        return view('routine.edit', compact('routine','batches','subjects'));
     }
 
     /**

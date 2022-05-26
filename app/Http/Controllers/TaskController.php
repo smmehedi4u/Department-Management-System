@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Batch;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +18,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::join("subjects","subjects.id","=","tasks.subject_id")->join("batches","batches.id","=","tasks.batch_id")->select("tasks.*", "subjects.name as sub_name","batches.name as batch_name")->get();
         return view('task.index', compact('tasks'));
     }
 
@@ -27,7 +29,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task.create');
+        $batches = Batch::all();
+        $subjects = Subject::all();
+        return view('task.create',compact('batches','subjects'));
     }
 
     /**
@@ -88,7 +92,9 @@ class TaskController extends Controller
     public function edit(task $task,$id)
     {
         $task = Task::find($id);
-        return view('task.edit', compact('task'));
+        $batches = Batch::all();
+        $subjects = Subject::all();
+        return view('task.edit', compact('task','batches','subjects'));
     }
 
     /**
