@@ -30,7 +30,7 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="date" 
+                            <label for="date"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('title') text-red-600 @enderror">
                                 Select date
                             </label>
@@ -51,7 +51,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
                                 Batch
                             </label>
-                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                        <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                             name="batch_id" id="" required>
                             <option value="">Select Batch</option>
 

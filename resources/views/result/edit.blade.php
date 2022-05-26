@@ -30,7 +30,7 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="date" 
+                            <label for="date"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('title') text-red-600 @enderror">
                                 Select date
                             </label>
@@ -55,8 +55,8 @@
                             name="batch_id" id="" required>
                             @foreach ($batches as $batch)
                                 <option @if ($result->batch_id==$batch->id)
-selected
-                                @endif value="{{$batch->id}}">{{$batch->name}}</option>
+
+                                @endif value="{{$batch->id}}">{{$batch->name}}</option> 
                             @endforeach
                         </select>
                             @error('batch_id')

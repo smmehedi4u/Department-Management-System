@@ -23,10 +23,10 @@
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        Batch ID
+                                        Batch
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Subject ID
+                                        Subject
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Teacher ID
@@ -49,10 +49,10 @@
                                 @foreach ($routines as $routine)
                                 <tr class="bg-white border-b  ">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                       {{ $routine->batch_id }}
+                                       {{ $routine->batch_name }}
                                     </th>
                                     <td class="px-6 py-4">
-                                    {{ $routine->subject_id }}
+                                    {{ $routine->sub_name }}
                                     </td>
                                     <td class="px-6 py-4">
                                     {{ $routine->teacher_id }}
