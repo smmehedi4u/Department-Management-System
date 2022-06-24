@@ -11,6 +11,8 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -129,6 +131,36 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(
 
 Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->group(function () {
     Route::view('/', "teacher.teacher_home")->name('home');
+
+    //Profile
+    Route::name("profile.")->prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::get('/create', [ProfileController::class, 'create'])->name('create');
+        Route::post('/create', [ProfileController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [ProfileController::class, 'destroy'])->name('destroy');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+        Route::post('/edit', [ProfileController::class, 'update'])->name('update');
+    });
+
+    //Task
+    Route::name("task.")->prefix('task')->group(function () {
+        Route::get('/', [TaskController::class, 'index'])->name('index');
+        Route::get('/create', [TaskController::class, 'create'])->name('create');
+        Route::post('/create', [TaskController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
+    });
+
+    //Publication
+    Route::name("publication.")->prefix('publication')->group(function () {
+        Route::get('/', [PublicationController::class, 'index'])->name('index');
+        Route::get('/create', [PublicationController::class, 'create'])->name('create');
+        Route::post('/create', [PublicationController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [PublicationController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [PublicationController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [PublicationController::class, 'update'])->name('update');
+    });
 });
 
 Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->group(function () {
