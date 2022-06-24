@@ -15,6 +15,15 @@
                     <x-nav-link :href="route('teacher.home')" :active="request()->routeIs('teacher.home')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('teacher.profile.index')" :active="request()->routeIs('teacher.profile.index')">
+                        {{ __('Profile') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('teacher.task.index')" :active="request()->routeIs('teacher.task.index')">
+                        {{ __('Task') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('teacher.publication.index')" :active="request()->routeIs('teacher.publication.index')">
+                        {{ __('Publication') }}
+                    </x-nav-link>
 
                 </div>
             </div>
@@ -47,6 +56,9 @@
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('teacher.profile.index')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
@@ -74,6 +86,15 @@
             <x-responsive-nav-link :href="route('teacher.home')" :active="request()->routeIs('teacher.home')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('teacher.profile.index')" :active="request()->routeIs('teacher.profile.index')">
+                {{ __('Profile') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('teacher.task.index')" :active="request()->routeIs('teacher.task.index')">
+                {{ __('Task') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('teacher.publication.index')" :active="request()->routeIs('teacher.publication.index')">
+                {{ __('Publication') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -91,6 +112,9 @@
                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('teacher.profile.index')" >
+                        {{ __('Profile') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
