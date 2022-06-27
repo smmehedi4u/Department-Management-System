@@ -51,31 +51,42 @@
                             @error('subject_id')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Error!</span> {{ $message }}</p>
-                            @enderror 
+                            @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="teacher_id" value="{{ $routine->teacher_id }}"
+                            <label for="teacher_id"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('teacher_id') text-red-600 @enderror">
                                 Teacher
                             </label>
-                            <input autofocus="true" type="integer" id="teacher_id" name="teacher_id" value="{{ $routine->teacher_id }}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('teacher_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                placeholder="Enter teacher id" required="">
-
+                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('subject_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                                name="teacher_id" id="" required>
+                                @foreach ($teachers as $teacher)
+                                    <option @if ($teacher->id == $routine->teacher_id)
+                                        selected
+                                    @endif value="{{$teacher->id}}">{{$teacher->name}}</option>
+                                @endforeach
+                            </select>
                             @error('teacher_id')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Error!</span> {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="day" value="{{ $routine->day }}"
+                            <label for="day"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('day') text-red-600 @enderror">
                                 Day
                             </label>
-                            <input autofocus="true" type="day" id="day" name="day" value="{{ $routine->day }}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                 placeholder="Enter day" required="">
-
+                            @php
+                                $days = array('Sunday','Monday', 'Tuesday', 'Wednesday','Thursday','Friday','Saturday');
+                            @endphp
+                        <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                            name="day" id="" required>
+                            @foreach ($days as $day)
+                                <option @if ($day == $routine->day)
+                                    selected
+                                @endif value="{{$day}}">{{$day}}</option>
+                            @endforeach
+                        </select>
                             @error('day')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                                         class="font-medium">Error!</span> {{ $message }}</p>

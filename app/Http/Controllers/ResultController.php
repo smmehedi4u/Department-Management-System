@@ -18,6 +18,7 @@ class ResultController extends Controller
     public function index()
     {
         $results = Result::join("batches","batches.id","=","results.batch_id")->select("results.*", "batches.name as batch_name")->get();
+
         return view('result.index', compact('results'));
     }
 
