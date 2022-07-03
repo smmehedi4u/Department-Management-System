@@ -27,7 +27,7 @@
                             @foreach ($batches as $batch)
                                 <option value="{{$batch->id}}">{{$batch->name}}</option>
                             @endforeach
-                        </select> 
+                        </select>
 
                             @error('batch_id')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
@@ -54,27 +54,40 @@
                             @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="teacher_id" value="{{ old('teacher_id') }}"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('teacher_id') text-red-600 @enderror">
-                                Teacher ID
-                            </label>
-                            <input autofocus="true" type="integer" id="teacher_id" name="teacher_id" value="{{ old('teacher_id') }}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('teacher_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                placeholder="Enter teacher id" required="">
+                                <label for="teacher_id"
+                                    class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
+                                    Teacher
+                                </label>
+                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('subject_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                                name="teacher_id" id="" required>
+                                <option value="">Select Teacher</option>
 
-                            @error('teacher_id')
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
-                                        class="font-medium">Error!</span> {{ $message }}</p>
-                            @enderror
+                                @foreach ($teachers as $teacher)
+                                    <option value="{{$teacher->id}}">{{$teacher->name}}</option>
+                                @endforeach
+                            </select>
+
+                                @error('teacher_id')
+                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                                            class="font-medium">Error!</span> {{ $message }}</p>
+                                @enderror
                         </div>
                         <div class="mb-6">
-                            <label for="day" value="{{ old('day') }}"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('day') text-red-600 @enderror">
+                            <label for="subject_id"
+                                class="block mb-2 text-sm font-medium text-gray-900 @error('date') text-red-600 @enderror">
                                 Day
                             </label>
-                            <input autofocus="true" type="day" id="day" name="day" value="{{ old('day') }}"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
-                                 placeholder="Enter day" required="">
+                            @php
+                                $days = array('Sunday','Monday', 'Tuesday', 'Wednesday','Thursday','Friday','Saturday');
+                            @endphp
+                        <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
+                            name="day" id="" required>
+                            <option value="">Select Day</option>
+
+                            @foreach ($days as $day)
+                                <option value="{{$day}}">{{$day}}</option>
+                            @endforeach
+                        </select>
 
                             @error('day')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span

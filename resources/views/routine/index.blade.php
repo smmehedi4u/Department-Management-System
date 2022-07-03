@@ -29,7 +29,7 @@
                                         Subject
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Teacher ID
+                                        Teacher Name
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Day
@@ -55,7 +55,7 @@
                                     {{ $routine->sub_name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                    {{ $routine->teacher_id }}
+                                    {{ $routine->teacher_name }}
                                     </td>
                                     <td class="px-6 py-4">
                                     {{ $routine->day }}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Routine;
 use App\Models\Batch;
 use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -14,11 +15,15 @@ class RoutineController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response 
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $routines = Routine::join("batches","batches.id","=","routines.batch_id")->join("subjects","subjects.id","=","routines.subject_id")->select("routines.*", "batches.name as batch_name","subjects.name as sub_name")->get();
+        $routines = Routine::join("batches", "batches.id", "=", "routines.batch_id")
+        ->join("subjects", "subjects.id", "=", "routines.subject_id")
+        ->join("users", "users.id", "=", "routines.teacher_id")
+        ->select("routines.*", "batches.name as batch_name", "subjects.name as sub_name", "users.name as teacher_name")
+        ->get();
         return view('routine.index', compact('routines'));
     }
 
@@ -31,7 +36,8 @@ class RoutineController extends Controller
     {
         $batches = Batch::all();
         $subjects = Subject::all();
-        return view('routine.create',compact('batches','subjects'));
+        $teachers = User::where('user_role', 1)->get();
+        return view('routine.create', compact('batches', 'subjects', 'teachers'));
     }
 
     /**
@@ -98,7 +104,9 @@ class RoutineController extends Controller
         $routine = Routine::find($id);
         $batches = Batch::all();
         $subjects = Subject::all();
-        return view('routine.edit', compact('routine','batches','subjects'));
+
+        $teachers = User::where('user_role', 1)->get();
+        return view('routine.edit', compact('routine', 'batches', 'subjects', "teachers"));
     }
 
     /**
