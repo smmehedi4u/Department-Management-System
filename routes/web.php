@@ -118,14 +118,14 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(
     });
 
     //Task
-    Route::name("task.")->prefix('task')->group(function () {
-        Route::get('/', [TaskController::class, 'index'])->name('index');
-        Route::get('/create', [TaskController::class, 'create'])->name('create');
-        Route::post('/create', [TaskController::class, 'store'])->name('store');
-        Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
-        Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
-        Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
-    });
+    // Route::name("task.")->prefix('task')->group(function () {
+    //     Route::get('/', [TaskController::class, 'index'])->name('index');
+    //     Route::get('/create', [TaskController::class, 'create'])->name('create');
+    //     Route::post('/create', [TaskController::class, 'store'])->name('store');
+    //     Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
+    //     Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
+    //     Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
+    // });
 
 });
 
@@ -142,15 +142,7 @@ Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->
         Route::post('/edit', [ProfileController::class, 'update'])->name('update');
     });
 
-    //Task
-    Route::name("task.")->prefix('task')->group(function () {
-        Route::get('/', [TaskController::class, 'index'])->name('index');
-        Route::get('/create', [TaskController::class, 'create'])->name('create');
-        Route::post('/create', [TaskController::class, 'store'])->name('store');
-        Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
-        Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
-        Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
-    });
+
 
     //Publication
     Route::name("publication.")->prefix('publication')->group(function () {
@@ -160,6 +152,18 @@ Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->
         Route::delete('/delete/{id}', [PublicationController::class, 'destroy'])->name('destroy');
         Route::get('/edit/{id}', [PublicationController::class, 'edit'])->name('edit');
         Route::post('/edit/{id}', [PublicationController::class, 'update'])->name('update');
+    });
+});
+
+Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_not_student'])->group(function () {
+    //Task
+    Route::name("task.")->prefix('task')->group(function () {
+        Route::get('/', [TaskController::class, 'index'])->name('index');
+        Route::get('/create', [TaskController::class, 'create'])->name('create');
+        Route::post('/create', [TaskController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
     });
 });
 
