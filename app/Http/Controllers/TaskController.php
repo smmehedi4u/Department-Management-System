@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\Batch;
+use App\Models\Routine;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::join("subjects","subjects.id","=","tasks.subject_id")->join("batches","batches.id","=","tasks.batch_id")->select("tasks.*", "subjects.name as sub_name","batches.name as batch_name")->get();
+        // $subjects_assigned = Routine::where("teacher_id", Auth::user()->id)->pluck("subject_id");
+        $tasks = Task::join("subjects", "subjects.id", "=", "tasks.subject_id")
+        ->join("batches", "batches.id", "=", "tasks.batch_id");
+        if (Auth::user()->user_role == 1) {
+            $tasks = $tasks->where("tasks.added_by", Auth::user()->id);
+        }
+        $tasks = $tasks->select("tasks.*", "subjects.name as sub_name", "batches.name as batch_name")
+        // dd($tasks->toSql());
+        ->get();
         return view('task.index', compact('tasks'));
     }
 
@@ -29,8 +38,22 @@ class TaskController extends Controller
      */
     public function create()
     {
+
+        if (Auth::user()->user_role == 1) {
+            $batches = Batch::join("routines", function ($joins) {
+                $joins->on("routines.batch_id", "=", "batches.id")
+                ->where("routines.teacher_id", Auth::user()->id);
+            })->select("batches.*")->get();
+            $subjects = Subject::join("routines", function ($joins) {
+                $joins->on("routines.subject_id", "=", "subjects.id")
+                ->where("routines.teacher_id", Auth::user()->id);
+            })->select("subjects.*")->get();
+        } else {
+
         $batches = Batch::all();
         $subjects = Subject::all();
+        }
+
         return view('task.create',compact('batches','subjects'));
     }
 
@@ -92,8 +115,25 @@ class TaskController extends Controller
     public function edit(task $task,$id)
     {
         $task = Task::find($id);
+        if ($task) {
+            if (Auth::user()->user_role == 1 && $task->added_by != Auth::user()->id) {
+                return redirect()->route('admin.task.index')->with('success', 'You dont have permission to edit this task');
+            }
+        }
+        if (Auth::user()->user_role == 1) {
+            $batches = Batch::join("routines", function ($joins) {
+                $joins->on("routines.batch_id", "=", "batches.id")
+                ->where("routines.teacher_id", Auth::user()->id);
+            })->select("batches.*")->get();
+            $subjects = Subject::join("routines", function ($joins) {
+                $joins->on("routines.subject_id", "=", "subjects.id")
+                ->where("routines.teacher_id", Auth::user()->id);
+            })->select("subjects.*")->get();
+        } else {
+
         $batches = Batch::all();
         $subjects = Subject::all();
+        }
         return view('task.edit', compact('task','batches','subjects'));
     }
 
@@ -143,7 +183,13 @@ class TaskController extends Controller
     public function destroy(task $task,$id)
     {
         $task = Task::find($id);
-        $task->delete();
+        if ($task) {
+            if (Auth::user()->user_role == 1 && $task->added_by != Auth::user()->id) {
+                return redirect()->route('admin.task.index')->with('success', 'You dont have permission to delete this task');
+            } else {
+                $task->delete();
+            }
+        }
         return redirect()->route('admin.task.index')->with('success','Task delete successfully');
     }
 }

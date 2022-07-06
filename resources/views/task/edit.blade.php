@@ -24,7 +24,7 @@
                             name="subject_id" id="" required>
                             @foreach ($subjects as $subject)
                                 <option @if ($task->subject_id==$subject->id)
-
+                                    selected
                                 @endif value="{{$subject->id}}">{{$subject->name}}</option>
                             @endforeach
                         </select>
@@ -63,7 +63,9 @@
                             <textarea id="details" name="details" rows="4"
                                 class="
                                 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('details') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror "
-                                placeholder="Details">{{ old('details') }}</textarea>
+                                placeholder="Details">
+                                    {{ $task->details }}
+                            </textarea>
 
                             @error('details')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
