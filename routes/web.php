@@ -13,6 +13,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\StdProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,15 +78,15 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(
         Route::post('/edit/{id}', [EventController::class, 'update'])->name('update');
     });
 
-    //Result
-    Route::name("result.")->prefix('result')->group(function () {
-        Route::get('/', [ResultController::class, 'index'])->name('index');
-        Route::get('/create', [ResultController::class, 'create'])->name('create');
-        Route::post('/create', [ResultController::class, 'store'])->name('store');
-        Route::delete('/delete/{id}', [ResultController::class, 'destroy'])->name('destroy');
-        Route::get('/edit/{id}', [ResultController::class, 'edit'])->name('edit');
-        Route::post('/edit/{id}', [ResultController::class, 'update'])->name('update');
-    });
+    // //Result
+    // Route::name("result.")->prefix('result')->group(function () {
+    //     Route::get('/', [ResultController::class, 'index'])->name('index');
+    //     Route::get('/create', [ResultController::class, 'create'])->name('create');
+    //     Route::post('/create', [ResultController::class, 'store'])->name('store');
+    //     Route::delete('/delete/{id}', [ResultController::class, 'destroy'])->name('destroy');
+    //     Route::get('/edit/{id}', [ResultController::class, 'edit'])->name('edit');
+    //     Route::post('/edit/{id}', [ResultController::class, 'update'])->name('update');
+    // });
 
     //Room
     Route::name("room.")->prefix('room')->group(function () {
@@ -165,8 +166,28 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_not_student'])->
         Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
         Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
     });
+
+    //Result
+    Route::name("result.")->prefix('result')->group(function () {
+        Route::get('/', [ResultController::class, 'index'])->name('index');
+        Route::get('/create', [ResultController::class, 'create'])->name('create');
+        Route::post('/create', [ResultController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [ResultController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{id}', [ResultController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [ResultController::class, 'update'])->name('update');
+    });
 });
 
 Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->group(function () {
     Route::view('/', "student.student_home")->name('home');
+
+    //Profile
+    Route::name("profile.")->prefix('profile')->group(function () {
+        Route::get('/', [StdProfileController::class, 'index'])->name('index');
+        Route::get('/create', [StdProfileController::class, 'create'])->name('create');
+        Route::post('/create', [StdProfileController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [StdProfileController::class, 'destroy'])->name('destroy');
+        Route::get('/edit', [StdProfileController::class, 'edit'])->name('edit');
+        Route::post('/edit', [StdProfileController::class, 'update'])->name('update');
+    });
 });

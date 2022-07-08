@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator; 
 
 class NoticeController extends Controller
 {
@@ -110,7 +110,7 @@ class NoticeController extends Controller
 
         if ($validator->fails()) {
             return back()
-                ->withErrors($validator)  
+                ->withErrors($validator)
                 ->withInput();
         }
 

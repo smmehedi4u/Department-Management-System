@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNoticsTable extends Migration
+class CreateStdprofilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +13,12 @@ class CreateNoticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notices', function (Blueprint $table) {
+        Schema::create('stdprofiles', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('details');
-            $table->binary('file')->nullable();
-            $table->date('date')->default(DB::raw('NOW()'));
-            $table->integer('added_by');
+            $table->integer("user_id");
+            $table->integer("batch_id");
+            $table->string("mobile");
+            $table->text("address");
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateNoticsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notics');
+        Schema::dropIfExists('stdprofiles');
     }
 }
