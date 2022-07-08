@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('admin.task.index')" :active="request()->routeIs('admin.task.index')">
                         {{ __('Task') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.result.index')" :active="request()->routeIs('admin.result.index')">
+                        {{ __('Result') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('teacher.publication.index')" :active="request()->routeIs('teacher.publication.index')">
                         {{ __('Publication') }}
                     </x-nav-link>
@@ -91,6 +94,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.task.index')" :active="request()->routeIs('admin.task.index')">
                 {{ __('Task') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.result.index')" :active="request()->routeIs('admin.result.index')">
+                {{ __('Result') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('teacher.publication.index')" :active="request()->routeIs('teacher.publication.index')">
                 {{ __('Publication') }}

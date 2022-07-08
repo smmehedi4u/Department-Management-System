@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
+                        {{ __('Task') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -46,6 +49,9 @@
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('student.profile.index')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
@@ -73,6 +79,9 @@
             <x-responsive-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
+                {{ __('Task') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -90,6 +99,9 @@
                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('student.profile.index')" >
+                        {{ __('Profile') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

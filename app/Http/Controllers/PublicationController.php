@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Publication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PublicationController extends Controller
 {
@@ -14,7 +16,8 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        //
+        $publications = Publication::all();
+        return view('publication.index', compact('publications'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        //
+        return view('publication.create');
     }
 
     /**
@@ -35,7 +38,28 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'address' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $publication = new Publication();
+
+        $publication->title = $request->title;
+        $publication->address = $request->address;
+        $publication->save();
+
+        $request->session()->flash('success', 'Publication added successfully!');
+
+        return back();
     }
 
     /**
@@ -46,7 +70,7 @@ class PublicationController extends Controller
      */
     public function show(Publication $publication)
     {
-        //
+        return view('publication.show',compact('publications'));
     }
 
     /**
@@ -55,9 +79,10 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function edit(Publication $publication)
+    public function edit(Publication $publication,$id)
     {
-        //
+        $publication = Publication::find($id);
+        return view('publication.edit',compact('publication'));
     }
 
     /**
@@ -67,9 +92,28 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publication $publication)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'address' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+
+        $publication = Publication::find($id);
+
+        $publication->title = $request->title;
+        $publication->address = $request->address;
+        $publication->save();
+
+        return redirect()->route('teacher.publication.index')->with('success','Publication updated successfully');
     }
 
     /**
@@ -78,8 +122,11 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Publication $publication)
+    public function destroy($id)
     {
-        //
+        $publication = Publication::find($id);
+        $publication->delete();
+        return redirect()->route('teacher.publication.index')->with('success','Publication has been deleted successfully');
+
     }
 }
