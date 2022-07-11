@@ -14,6 +14,10 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\StdProfileController;
+use App\Models\Routine;
+use App\Models\StdProfile;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,7 +135,18 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(
 });
 
 Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->group(function () {
-    Route::view('/', "teacher.teacher_home")->name('home');
+    Route::get('/', function (Request $request) {
+
+        $today_class = Routine::join("batches", "batches.id", "=", "routines.batch_id")
+            ->join("subjects", "subjects.id", "=", "routines.subject_id")
+            ->select("routines.*", "batches.name as batch_name", "subjects.name as sub_name")
+            ->where("teacher_id", Auth::user()->id)->where("day", date("l"))->get();
+        $next_day_class = Routine::join("batches", "batches.id", "=", "routines.batch_id")
+            ->join("subjects", "subjects.id", "=", "routines.subject_id")
+            ->select("routines.*", "batches.name as batch_name", "subjects.name as sub_name")
+            ->where("teacher_id", Auth::user()->id)->where("day", date("l", strtotime("+1day")))->get();
+        return view("teacher.teacher_home", compact("today_class", "next_day_class"));
+    })->name('home');
 
     //Profile
     Route::name("profile.")->prefix('profile')->group(function () {
@@ -179,7 +194,20 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_not_student'])->
 });
 
 Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->group(function () {
-    Route::view('/', "student.student_home")->name('home');
+    Route::get('/', function (Request $request) {
+
+        $sp = StdProfile::where("user_id", Auth::user()->id)->first();
+        $today_class = Routine::join("subjects", "subjects.id", "=", "routines.subject_id")
+            ->join("users", "users.id", "=", "routines.teacher_id")
+            ->select("routines.*",  "subjects.name as sub_name", "users.name as teacher_name")
+            ->where("batch_id",  $sp->batch_id)->where("day", date("l"))->get();
+        $next_day_class = Routine::join("subjects", "subjects.id", "=", "routines.subject_id")
+            ->join("users", "users.id", "=", "routines.teacher_id")
+            ->select("routines.*", "subjects.name as sub_name", "users.name as teacher_name")
+            ->where("batch_id", $sp->batch_id)->where("day", date("l", strtotime("+1day")))->get();
+
+        return view("student.student_home", compact("today_class", "next_day_class"));
+    })->name('home');
 
     //Profile
     Route::name("profile.")->prefix('profile')->group(function () {
