@@ -19,9 +19,9 @@ class StdProfileController extends Controller
     {
         $user = auth()->user();
 
-        $stdprofile = StdProfile::where("user_id",$user->id)->join("batches","batches.id","stdprofiles.batch_id")->join("users","users.id","stdprofiles.user_id")->select("stdprofiles.*","batches.session as batch_session","batches.name as batch_name","users.name as user_name","users.email as user_email")->first();
+        $stdprofile = StdProfile::where("user_id", $user->id)->join("batches", "batches.id", "std_profiles.batch_id")->join("users", "users.id", "std_profiles.user_id")->select("std_profiles.*", "batches.session as batch_session", "batches.name as batch_name", "users.name as user_name", "users.email as user_email")->first();
 
-        return view('stdprofile.index', compact('user',"stdprofile"));
+        return view('stdprofile.index', compact('user', "stdprofile"));
     }
 
     /**
@@ -55,9 +55,9 @@ class StdProfileController extends Controller
     {
         $user = auth()->user();
 
-        $stdprofile = StdProfile::where("user_id",$user->id)->join("batches","batches.id","stdprofiles.batch_id")->join("users","users.id","stdprofiles.user_id")->select("stdprofiles.*","batches.session as batch_session","batches.name as batch_name","users.name as user_name","users.email as user_email")->first();
+        $stdprofile = StdProfile::where("user_id", $user->id)->join("batches", "batches.id", "std_profiles.batch_id")->join("users", "users.id", "std_profiles.user_id")->select("std_profiles.*", "batches.session as batch_session", "batches.name as batch_name", "users.name as user_name", "users.email as user_email")->first();
         dd($stdprofile);
-        return view('stdprofile.index', compact('user',"stdprofile"));
+        return view('stdprofile.index', compact('user', "stdprofile"));
     }
 
     /**
@@ -69,9 +69,9 @@ class StdProfileController extends Controller
     public function edit(StdProfile $stdProfile)
     {
         $user = auth()->user();
-        $stdprofile = StdProfile::where("user_id",$user->id)->first();
+        $stdprofile = StdProfile::where("user_id", $user->id)->first();
         $batches = Batch::all();
-        return view('stdprofile.edit', compact('user',"stdprofile","batches"));
+        return view('stdprofile.edit', compact('user', "stdprofile", "batches"));
     }
 
     /**
@@ -100,7 +100,7 @@ class StdProfileController extends Controller
         $user->save();
 
 
-        $stdprofile = StdProfile::where("user_id",$user->id)->first();
+        $stdprofile = StdProfile::where("user_id", $user->id)->first();
 
         $stdprofile->batch_id = $request->batch_id;
 
@@ -108,7 +108,7 @@ class StdProfileController extends Controller
         $stdprofile->address = $request->address;
         $stdprofile->save();
 
-        return redirect()->route('student.stdprofile.index')->with('success','Profile update successfully');
+        return redirect()->route('student.stdprofile.index')->with('success', 'Profile update successfully');
     }
 
     /**
