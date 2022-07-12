@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->integer('subject_id');
             $table->integer('batch_id');
             $table->text('details');
-            $table->integer('end_date');
+            $table->date('end_date');
             $table->integer('added_by');
             $table->timestamps();
         });
