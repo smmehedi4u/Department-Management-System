@@ -148,6 +148,9 @@ Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->
         return view("teacher.teacher_home", compact("today_class", "next_day_class"));
     })->name('home');
 
+    //Task
+
+
     //Profile
     Route::name("profile.")->prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
@@ -207,7 +210,18 @@ Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->
             ->where("batch_id", $sp->batch_id)->where("day", date("l", strtotime("+1day")))->get();
 
         return view("student.student_home", compact("today_class", "next_day_class"));
-    })->name('home');
+    }
+    )->name('home');
+
+
+    //Task
+    Route::name("task.")->prefix('task')->group(function () {
+    $st = StdProfile::where("user_id", Auth::user()->id)->first();
+    $pending_task = Task::join("subjects", "subjects.id", "=", "tasks.subject_id")
+            ->select("tasks.*",  "subjects.name as sub_name")
+            ->where("batch_id",  $st->batch_id)->where("date", ">=",date("Y-m-d"))->get();
+        });
+
 
     //Profile
     Route::name("profile.")->prefix('profile')->group(function () {

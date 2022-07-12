@@ -15,7 +15,7 @@
                     <x-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
+                    <x-nav-link :href="route('student.task')" :active="request()->routeIs('student.home')">
                         {{ __('Task') }}
                     </x-nav-link>
                 </div>
@@ -79,7 +79,7 @@
             <x-responsive-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('student.home')" :active="request()->routeIs('student.home')">
+            <x-responsive-nav-link :href="route('student.task')" :active="request()->routeIs('student.home')">
                 {{ __('Task') }}
             </x-responsive-nav-link>
         </div>
