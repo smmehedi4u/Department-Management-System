@@ -43,7 +43,7 @@ class TaskController extends Controller
             $batches = Batch::join("routines", function ($joins) {
                 $joins->on("routines.batch_id", "=", "batches.id")
                 ->where("routines.teacher_id", Auth::user()->id);
-            })->select("batches.*")->get();
+            })->select("batches.*")->distinct()->get();
             $subjects = Subject::join("routines", function ($joins) {
                 $joins->on("routines.subject_id", "=", "subjects.id")
                 ->where("routines.teacher_id", Auth::user()->id);
@@ -124,7 +124,7 @@ class TaskController extends Controller
             $batches = Batch::join("routines", function ($joins) {
                 $joins->on("routines.batch_id", "=", "batches.id")
                 ->where("routines.teacher_id", Auth::user()->id);
-            })->select("batches.*")->get();
+            })->select("batches.*")->distinct()->get();
             $subjects = Subject::join("routines", function ($joins) {
                 $joins->on("routines.subject_id", "=", "subjects.id")
                 ->where("routines.teacher_id", Auth::user()->id);

@@ -108,7 +108,7 @@ class StdProfileController extends Controller
         $stdprofile->address = $request->address;
         $stdprofile->save();
 
-        return redirect()->route('student.stdprofile.index')->with('success', 'Profile update successfully');
+        return redirect()->route('student.profile.index')->with('success', 'Profile update successfully');
     }
 
     /**

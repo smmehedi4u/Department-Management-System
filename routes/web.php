@@ -16,6 +16,7 @@ use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\StdProfileController;
 use App\Models\Routine;
 use App\Models\StdProfile;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::user()) {
+        return redirect()->route('dashboard');
+    } else {
+        return redirect()->route('login');
+    }
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
@@ -209,26 +214,19 @@ Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->
             ->select("routines.*", "subjects.name as sub_name", "users.name as teacher_name")
             ->where("batch_id", $sp->batch_id)->where("day", date("l", strtotime("+1day")))->get();
 
-        return view("student.student_home", compact("today_class", "next_day_class"));
+            $pending_task = Task::join("subjects", "subjects.id", "=", "tasks.subject_id")
+            ->select("tasks.*",  "subjects.name as sub_name")
+            ->where("batch_id",  $sp->batch_id)->where("end_date", ">=", date("Y-m-d"))->get();
+            return view("student.student_home", compact("today_class", "next_day_class", "pending_task"));
     }
     )->name('home');
 
 
-    //Task
-    Route::name("task.")->prefix('task')->group(function () {
-    $st = StdProfile::where("user_id", Auth::user()->id)->first();
-    $pending_task = Task::join("subjects", "subjects.id", "=", "tasks.subject_id")
-            ->select("tasks.*",  "subjects.name as sub_name")
-            ->where("batch_id",  $st->batch_id)->where("date", ">=",date("Y-m-d"))->get();
-        });
 
 
     //Profile
     Route::name("profile.")->prefix('profile')->group(function () {
         Route::get('/', [StdProfileController::class, 'index'])->name('index');
-        Route::get('/create', [StdProfileController::class, 'create'])->name('create');
-        Route::post('/create', [StdProfileController::class, 'store'])->name('store');
-        Route::delete('/delete/{id}', [StdProfileController::class, 'destroy'])->name('destroy');
         Route::get('/edit', [StdProfileController::class, 'edit'])->name('edit');
         Route::post('/edit', [StdProfileController::class, 'update'])->name('update');
     });
