@@ -8,8 +8,9 @@
     <title>CSE Department Management System</title>
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+<style>
         .bg-primary {
             background: #6777ef !important;
         }
@@ -54,6 +55,30 @@
             </div>
         </nav>
 
+        <div id="carouselExampleControls" class="carousel slide my-2" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{{asset('img/img3.jpeg')}}" height="250" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="{{asset('img/img4.jpg')}}" height="250" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="{{asset('img/img2.jpg')}}" height="250" class="d-block w-100" alt="...">
+              </div>
+            </div>
+           <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </button>
+          </div>
+
+
+
         <div class="card border-primary my-2">
             <div class="card-header bg-primary text-white">
                 About Us
@@ -61,16 +86,28 @@
             <div class="card-body">
                 <h4 class="card-title">Welcome To FEC</h4>
                 <p class="card-text">
-                    <strong>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    <strong>Faridpur Engineering College is affiliated with University of Dhaka under the Faculty of Engineering and Technology.</strong>
                 </p>
                 <p class="card-text">
-                    <strong>Vision:</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-                </p>
-                <p class="card-text">
-                    <strong>Mission:</strong> We profoundly recognize the role of education in the development of a country. We also believe that young people from all sections of the society have the right to education. To fulfill our vision, we are aiming to bring quality education at the reach of the aspiring students by reliving them from the burden of excessive expenses of the higher education. Our mission also includes development of social values and humanism among the students by creating an appropriate environment of education.
-                </p>
-                <p class="card-text">
-                    <strong>Founder:</strong> The founder of the University is Prof. Rasheda Khaleque who has a long experience in teaching and managing educational institutions. She is also the Chairman of the Board of Trustees of the Faridpur Engineering College.
+                    <strong>About Us:</strong> Brief Introduction
+
+                    Faridur Engineering College is located about 2.7 kilometers away from the main city of Faridpur. Faridpur Engineering College is established to conduct B.Sc in Engineering degree in Bangladesh. Administrative activities controlled by Directorate of Technical Education (DTE), under Technical and Madrasha  Education Division (TMED), Ministry of Education.
+
+
+
+                    This College is affiliated with the University of Dhaka under the  Faculty of Engineering & Technology for certification four (04) years B.Sc.(Engg.) degree. Its academic journey has launched in 2013 with two departments by 120 students. In the 2017-2018 Session, the College added another feather in its cap ‘Computer Science and Engineering’ (CSE) Department under the same University since then. The College now belongs to three departments:
+
+                    <br/> 1.  Civil Engineering (CE) <br/>
+
+                                                    2.  Electrical and Electronics Engineering (EEE)<br/>
+
+                                                    3.  Computer Science and Engineering (CSE)<br/>
+
+
+
+                    The College has 01 administrative buildings, 03 academic buildings, 01 multipurpose buildings, 01 bank- post office and cafeteria building. 03 residential halls provide students’ accommodation, one is for female students and another two are for males students. There are also a Mosque and a residential building for the Principal. The institute has a playing field and a library with academic-related books, a modern computer lab with fast-paced Internet access, and modern learning facilities, including sophisticated Labs/Workshops.
+
+
                 </p>
             </div>
         </div>
@@ -80,6 +117,8 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 </body>
 
