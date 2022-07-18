@@ -17,12 +17,18 @@
                     <section style="background-color: #eee;">
                         <div class="container py-5">
 
-                          <div class="row"> 
+                          <div class="row">
                             <div class="col-lg-4">
                               <div class="card mb-4">
                                 <div class="card-body text-center ">
-                                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                    @if ($profile->image == null)
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                     class="rounded-circle img-fluid" style="width: 150px;margin-left: 80px">
+@else
+<img src="{{ url('public/img/'.$profile->image) }}" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 150px;margin-left: 80px">
+
+                                    @endif
                                   <h5 class="my-3">{{ $user->name }}</h5>
                                   <p class="text-muted mb-1">{{ $profile->designation_name }}</p>
                                 </div>

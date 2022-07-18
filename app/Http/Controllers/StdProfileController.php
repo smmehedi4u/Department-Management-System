@@ -106,6 +106,16 @@ class StdProfileController extends Controller
 
         $stdprofile->mobile = $request->mobile;
         $stdprofile->address = $request->address;
+        if ($request->file('image')) {
+
+            $file = $request->file('image');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('public/img'), $filename);
+
+            $stdprofile->image = $filename;
+
+            // dd($stdprofile);
+        }
         $stdprofile->save();
 
         return redirect()->route('student.profile.index')->with('success', 'Profile update successfully');

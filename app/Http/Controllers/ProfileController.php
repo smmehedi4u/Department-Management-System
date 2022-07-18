@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -56,7 +56,7 @@ class ProfileController extends Controller
         $user = auth()->user();
 
         $profile = Profile::where("user_id",$user->id)->join("designations","designations.id","profiles.designation_id")->join("users","users.id","profiles.user_id")->select("profiles.*","designations.title as designation_name","users.name as user_name")->first();
-        dd($profile);
+
         return view('profile.index', compact('user',"profile"));
     }
 
@@ -94,6 +94,9 @@ class ProfileController extends Controller
                 ->withInput();
         }
 
+
+
+
         $user = Auth::user();
 
         $user->name = $request->name;
@@ -106,6 +109,12 @@ class ProfileController extends Controller
 
         $profile->mobile = $request->mobile;
         $profile->address = $request->address;
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('public/img'), $filename);
+            $profile->image = $filename;
+        }
         $profile->save();
 
         return redirect()->route('teacher.profile.index')->with('success','Profile update successfully');
