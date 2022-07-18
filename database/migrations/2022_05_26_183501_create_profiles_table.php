@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->integer("user_id");
             $table->string("mobile");
+            $table->string("image")->nullable();
             $table->text("address");
             $table->integer("designation_id");
             $table->timestamps();

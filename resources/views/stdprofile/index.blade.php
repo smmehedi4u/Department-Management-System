@@ -21,8 +21,14 @@
                             <div class="col-lg-4">
                               <div class="card mb-4">
                                 <div class="card-body text-center ">
-                                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                    @if ($stdprofile->image == null)
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                     class="rounded-circle img-fluid" style="width: 150px;margin-left: 80px">
+@else
+<img src="{{ url('public/img/'.$stdprofile->image) }}" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 150px;margin-left: 80px">
+
+                                    @endif
 
                                 </div>
                               </div>

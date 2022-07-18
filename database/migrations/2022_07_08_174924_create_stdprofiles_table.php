@@ -18,6 +18,7 @@ class CreateStdprofilesTable extends Migration
             $table->integer("user_id");
             $table->integer("batch_id");
             $table->string("mobile");
+            $table->string("image")->nullable();
             $table->text("address");
             $table->timestamps();
         });

@@ -91,6 +91,19 @@ selected
                                         class="font-medium">Error!</span> {{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="mb-6">
+                            <label
+                                class="block mb-2 text-sm font-medium   text-gray-900 @error('image') text-red-600 @enderror"
+                                for="user_avatar">Profile Image</label>
+                            <input name="image"
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none @error('image') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror"
+                                aria-describedby="user_avatar_help" id="file" type="file">
+
+                            @error('image')
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                                        class="font-medium">Error!</span> {{ $message }}</p>
+                            @enderror
+                        </div>
 
                         <button type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
