@@ -9,8 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 ">
+                    @if ($today_class)
+                    <div class="relative overflow-x-auto mb-5 shadow-md sm:rounded-lg">
+                        <table class="w-full mb-5 text-sm text-left text-gray-500 ">
                             <caption><strong> Today Class </strong></caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
 
@@ -54,10 +55,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        </div>
+                    </div>
+                        @endif
+                        @if ($next_day_class)
                         <hr>
 
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <div class="relative overflow-x-auto mb-5 shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 ">
                             <caption><strong>Next Day Class</strong></caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -101,6 +104,43 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
+                        @endif
+                        @if ($pending_task)
+
+                        <hr>
+
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm text-left text-gray-500 ">
+                            <caption><strong>Pending Task</strong></caption>
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Subject
+                                    </th>
+                                    <th>Task</th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Last Date
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pending_task as $pt)
+                                <tr class="bg-white border-b  ">
+                                    <td class="px-6 py-4">
+                                    {{ $pt->sub_name }}
+                                    </td>
+                                    <td>{{ $pt->details }}</td>
+                                    <td class="px-6 py-4">
+                                    {{ $pt->end_date }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+
+                        @endif
                     </div>
                 </div>
             </div>
