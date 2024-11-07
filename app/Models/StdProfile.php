@@ -9,5 +9,5 @@ class StdProfile extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'batch_id', 'mobile', 'address', "image"];
+    //protected $fillable = ['user_id', 'batch_id', 'mobile', 'address', "image"];
 }
