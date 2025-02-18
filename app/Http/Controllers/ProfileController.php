@@ -100,10 +100,15 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $user->name = $request->name;
-        $user->save();
+        // $user->save();
 
 
         $profile = Profile::where("user_id",$user->id)->first();
+
+        if (!$profile) {
+            $profile = new Profile();
+            $profile->user_id = Auth::id(); // Assign the user_id when creating a new profile
+        }
 
         $profile->designation_id = $request->designation_id;
 

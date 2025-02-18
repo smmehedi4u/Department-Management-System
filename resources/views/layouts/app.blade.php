@@ -13,6 +13,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {{-- tailwind css --}}
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

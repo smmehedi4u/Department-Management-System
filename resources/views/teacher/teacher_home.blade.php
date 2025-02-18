@@ -12,7 +12,9 @@
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 ">
-                        <caption><strong> Today Class </strong></caption>
+                        <caption class="text-lg font-semibold text-gray-700 bg-gray-100 p-3 rounded-t-md mt-10">
+                            Today Class
+                        </caption>
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
 
                             <tr>
@@ -60,7 +62,9 @@
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 ">
-                        <caption><strong>Next Day Class</strong></caption>
+                        <caption class="text-lg font-semibold text-gray-700 bg-gray-100 p-3 rounded-t-md mt-10">
+                            Next Day Class
+                        </caption>
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                             <tr>
                                 <th scope="col" class="px-6 py-3">

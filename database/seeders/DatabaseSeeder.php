@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\StdProfile;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateUsersSeeder::class);
         $this->call(Batch::class);
         $this->call(SubjectSeeder::class);
+        $this->call(RoutineSeeder::class);
+        $this->call(StdProfileSeeder::class);
     }
 }

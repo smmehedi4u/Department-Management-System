@@ -5,121 +5,223 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSE Department Management System</title>
+    <title>Department Management System</title>
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMQMR5j5N1vpBz4/5ggUuU0H4i78T6v5ws5r9Ph" crossorigin="anonymous">
 
-<style>
+    <style>
+
+        .main-container {
+            width: 90%; /* Covers 90% of the viewport width */
+            margin: 0 auto; /* Centers the container */
+        }
         .bg-primary {
             background: #6777ef !important;
         }
-
-
         .border-primary {
             border-color: #6777ef !important;
         }
+
+        .navbar-nav .nav-item {
+    margin: 0 10px; /* Adds space between menu items */
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff; /* Text color */
+    font-weight: 500; /* Slightly bold */
+    font-size: 1.1rem; /* Adjust font size */
+    transition: color 0.3s, background-color 0.3s; /* Smooth transition */
+    padding: 10px 15px; /* Padding around links */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #ffffff; /* Background color on hover */
+    color: #6777ef; /* Text color on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.navbar-nav .active .nav-link {
+    background-color: #ffffff; /* Active item background */
+    color: #6777ef; /* Active item text color */
+}
+
+        .hero-section {
+        background-image: url("{{ asset('img/cover.jpeg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 400px; /* Ensures it occupies significant space */
+    }
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
+        .about-section {
+            background-color: #f8f9fa;
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+        }
+
+        .about-section .lead {
+            font-size: 1.25rem;
+            color: #555;
+        }
+
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid main-container">
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-            <a class="navbar-brand" href="/">
-                <div style="display:flex">
-                    <img src="{{asset("img/logo.png")}}" alt="" width="100" height="100">
-
-                    <div class="ml-3">
-                        <h3>Faridpur Engineering College</h3>
-                        <p>Computer Science and Engineering</p>
-                    </div>
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo" width="80" height="80">
+                <div class="ml-3 text-white">
+                    <h3 style="font-size: 1.25rem;">Nigatola University of Engineering and Technology</h3>
+                    <p class="mb-0" style="font-size: 1rem;">Computer Science and Engineering</p>
                 </div>
             </a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-                <div class="ml-auto text-white">
-                    <p>
-                        <br> fec@edu.bd
-                    </p>
-
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route("login")}}">Login</a>
-                        </li>
-                    </ul>
-
-                </div>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admission') }}">Admission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                </ul>
             </div>
         </nav>
 
-        <div id="carouselExampleControls" class="carousel slide my-2" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="{{asset('img/img3.jpeg')}}" height="250" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="{{asset('img/img4.jpg')}}" height="250" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="{{asset('img/img2.jpg')}}" height="250" class="d-block w-100" alt="...">
-              </div>
+
+
+        <!-- Hero Section -->
+        <section class="hero-section d-flex align-items-center justify-content-center" style="min-height: 600px; padding: 100px 0; background-color: #6777ef;">
+            <div class="container text-center text-white">
+                <h1 class="display-3">Welcome to NUET</h1>
+                <p class="lead">Your journey to excellence in engineering starts here</p>
+                <a href="{{ route('about') }}" class="btn btn-lg btn-light mt-4">Learn More</a>
             </div>
-           <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </button>
-          </div>
+        </section>
 
-
-
-        <div class="card border-primary my-2">
-            <div class="card-header bg-primary text-white">
-                About Us
-            </div>
-            <div class="card-body">
-                <h4 class="card-title">Welcome To FEC</h4>
-                <p class="card-text">
-                    <strong>Faridpur Engineering College is affiliated with University of Dhaka under the Faculty of Engineering and Technology.</strong>
-                </p>
-                <p class="card-text">
-                    <strong>About Us:</strong> Brief Introduction
-
-                    Faridur Engineering College is located about 2.7 kilometers away from the main city of Faridpur. Faridpur Engineering College is established to conduct B.Sc in Engineering degree in Bangladesh. Administrative activities controlled by Directorate of Technical Education (DTE), under Technical and Madrasha  Education Division (TMED), Ministry of Education.
-
-
-
-                    This College is affiliated with the University of Dhaka under the  Faculty of Engineering & Technology for certification four (04) years B.Sc.(Engg.) degree. Its academic journey has launched in 2013 with two departments by 120 students. In the 2017-2018 Session, the College added another feather in its cap ‘Computer Science and Engineering’ (CSE) Department under the same University since then. The College now belongs to three departments:
-
-                    <br/> 1.  Civil Engineering (CE) <br/>
-
-                                                    2.  Electrical and Electronics Engineering (EEE)<br/>
-
-                                                    3.  Computer Science and Engineering (CSE)<br/>
-
-
-
-                    The College has 01 administrative buildings, 03 academic buildings, 01 multipurpose buildings, 01 bank- post office and cafeteria building. 03 residential halls provide students’ accommodation, one is for female students and another two are for males students. There are also a Mosque and a residential building for the Principal. The institute has a playing field and a library with academic-related books, a modern computer lab with fast-paced Internet access, and modern learning facilities, including sophisticated Labs/Workshops.
-
-
-                </p>
-            </div>
+<!-- About Section -->
+<section class="about-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 text-primary">About</h2>
+            <p class="lead">Explore the foundation of innovation and excellence at the Computer Science and Engineering Department.</p>
         </div>
-        <div class="card text-white bg-primary">
-            <div class="card-body mx-auto">
-                Copyright © 2021 Faridpur Engineering College DMS.All rights reserved
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <img src="{{ asset('img/img2.jpg') }}" alt="CSE Department" class="img-fluid rounded">
+            </div>
+            <div class="col-lg-6">
+                <h3 class="text-primary">Our Mission and Vision</h3>
+                <p>
+                    At the Computer Science and Engineering Department of Nigatola University of Engineering and Technology (NUET), we aim to foster a rigorous academic environment that empowers students to excel in the rapidly evolving tech landscape. With a commitment to innovation, research, and practical learning, we prepare students for impactful careers in technology.
+                </p>
+                <h4 class="mt-4">Why Choose Our Department?</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary"></i> Cutting-edge curriculum aligned with industry standards</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary"></i> State-of-the-art laboratories and research facilities</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary"></i> Faculty with diverse expertise and industry experience</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary"></i> Opportunities for internships and hands-on projects</li>
+                </ul>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+</section>
 
+
+       <!-- Academic Section -->
+<section class="academic-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-4 text-primary">Academic Programs</h2>
+            <p class="lead">Explore our comprehensive programs designed to cultivate skills and knowledge in Computer Science and Engineering.</p>
+        </div>
+
+        <div class="row">
+            <!-- Undergraduate Programs -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">Undergraduate Program</h4>
+                        <p class="card-text">
+                            Our Bachelor of Science in Computer Science and Engineering (BSc in CSE) program provides a strong foundation in computer science fundamentals, programming, and problem-solving skills essential for the tech industry.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-chevron-right text-primary"></i> Core courses in algorithms, databases, and software engineering</li>
+                            <li><i class="fas fa-chevron-right text-primary"></i> Opportunities for internships and projects</li>
+                            <li><i class="fas fa-chevron-right text-primary"></i> Access to state-of-the-art labs and equipment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graduate Programs -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">Graduate Program</h4>
+                        <p class="card-text">
+                            Our Master's program in CSE emphasizes research and advanced topics, preparing students for leadership roles in academia, industry, and beyond.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-chevron-right text-primary"></i> Specialized courses in AI, cybersecurity, and data science</li>
+                            <li><i class="fas fa-chevron-right text-primary"></i> Research opportunities with expert faculty</li>
+                            <li><i class="fas fa-chevron-right text-primary"></i> Pathway to doctoral studies and innovation careers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Research and Facilities -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">Research & Facilities</h4>
+                        <p class="card-text">
+                            The CSE Department is equipped with cutting-edge labs and resources to support both academic and applied research.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-chevron-right text-primary"></i> AI and Robotics Laboratory</li>
+                            <li><i class="fas fa-chevron-right text-primary"></i> Data Science and Machine Learning Center</li>
+                            <li><i class="fas fa-chevron-right text-primary"></i> Software Development and Testing Labs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+        <!-- Footer -->
+        <footer class="footer text-center">
+            <p>&copy; 2021 Nigatola University of Engineering and Technology DMS. All rights reserved.</p>
+            <p>Email: fec@edu.bd | Phone: +880123456789</p>
+                <div class="social-icons">
+                    <a href="#" class="text-primary mr-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-primary mr-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-primary"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

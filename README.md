@@ -1,64 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Department Management System
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The Department Management System is a web application designed to streamline communication and collaboration between students and teachers within a department. The project allows users with different roles (Admin, Teacher, and Student) to interact based on role-specific permissions and features, enhancing the management of schedules, tasks, and publications.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Role-based Access Control:
+    - Admin: Full access, including permissions to manage users, schedules, and system settings.
+    - Teacher: Access to manage tasks, add publications, edit profile, and view class schedules.
+    - Student: Limited to viewing today's and upcoming class schedules and pending tasks.
 
-## Laravel Sponsors
+- Modules
+    - Task Management: Teachers can create and assign tasks to students for effective learning.
+    - Class Scheduling: Both teachers and students can view class schedules, ensuring everyone stays updated.
+    - Publication Management: Teachers can add and manage their publications to share knowledge and research with students.
+    - Routine Management: Manage and display daily and weekly class routines.
+    - Batch Management: Organize students into batches, allowing for easy schedule and task assignments.
+    - Designation Management: Manage designations for faculty members to establish clear roles.
+    - Event Management: Schedule and track departmental events, ensuring students and teachers are informed of upcoming activities.
+    - Result Management: Record and view student results, providing easy access to academic performance data.
+    - Room Management: Assign rooms for classes and events, simplifying room allocation and scheduling.
+    - Subject Management: Add and manage subjects offered by the department, keeping course offerings organized.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## Technologies Used
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Frontend: HTML, CSS, Bootstrap
+- Backend: Laravel Framework
+- Database: MySQL
 
-## Contributing
+## Installation Guide
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Follow these steps to set up the project on your local machine:
 
-## Code of Conduct
+### Prerequisites
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- PHP (>= 8.0)
+- Composer
+- MySQL
+- Git
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Setup Instructions
+
+ 1. Clone the repository:
+
+```bash
+    git clone https://github.com/yourusername/department-management-system.git
+```
+2. Moved new Folder
+```bash
+    cd department-management-system
+```
+
+3. Install dependencies:
+
+```bash
+    composer install
+```
+
+4. Setup Environment: 
+
+```bash
+    cp .env.example .env
+```
+
+5. Open .env and configure the following:
+
+```bash
+    DB_DATABASE=your_database_name
+    DB_USERNAME=your_username
+    DB_PASSWORD=your_password
+```
+
+6. Generate application key:
+
+```bash
+    php artisan key:generate
+```
+
+7. Run migrations and seed the database:
+
+This command will create the database tables and populate initial data using seeders.
+
+```bash
+    php artisan migrate --seed
+```
+
+8. Serve the application:
+
+Start the Laravel development server.
+
+```bash
+    php artisan serve
+```
+
+9.Access the application:
+
+Open your browser and visit http://localhost:8000.
+
+## Seeded Data for Testing
+
+The project includes seeders to populate test data for each user role (Admin, Teacher, and Student).
+
+- Admin Login:
+    - Email: admin@gmail.com
+    - Password: 123456
+
+- Teacher Login:
+    - Email: teacher@gmail.com
+    - Password: 123456
+
+- Student Login:
+    - Email: student@gmail.com
+    - Password: 123456
+
+## Project Structure
+
+- Roles: Admin, Teacher, and Student roles each have unique access rights within the application.
+- Role-Based Views: Users experience different interfaces based on their roles, ensuring tailored functionality and security.
+- CRUD Operations: For managing schedules, tasks, and publications.
+- Notifications and Flash Messages: Provide feedback to users based on their actions (e.g., task completion, schedule updates).
+
+
+
+

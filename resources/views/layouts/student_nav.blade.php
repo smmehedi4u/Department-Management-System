@@ -40,7 +40,7 @@
                     <x-slot name="content">
                         <!-- Authentication -->
 
-                        <x-dropdown-link :href="route('student.profile.index')">
+                        <x-dropdown-link :href="route('student.profile.index')"> 
                             {{ __('Profile') }}
                         </x-dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
