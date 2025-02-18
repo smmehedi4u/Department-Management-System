@@ -51,10 +51,13 @@
                                 <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @error('batch_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror  "
                                 name="designation_id" id="" required>
                                 @foreach ($designations as $designation)
-                                    <option @if ($profile->designation_id==$designation->id)
-selected
-                                    @endif value="{{$designation->id}}">{{$designation->title}}</option>
-                                @endforeach
+                                        <option value="{{ $designation->id }}"
+                                            @if (isset($profile) && $profile->designation_id == $designation->id)
+                                                selected
+                                            @endif>
+                                            {{ $designation->title }}
+                                        </option>
+                                    @endforeach
                             </select>
 
                             @error('designation_id')
@@ -67,7 +70,7 @@ selected
                             <label
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('file') text-red-600 @enderror"
                                 for="user_avatar">Mobile</label>
-                            <input name="mobile" value="{{ $profile->mobile }}"
+                            <input name="mobile" value="{{ $profile ? $profile->mobile : '' }}"
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none @error('file') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror"
                                 aria-describedby="user_avatar_help" id="mobile" type="text">
 
@@ -84,7 +87,7 @@ selected
 
                                 <textarea id="address" name="address" rows="4"
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('address') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 @enderror "
-                                > {{ $profile->address  }} </textarea>
+                                > {{ $profile ? $profile->address : ''  }} </textarea>
 
                             @error('address')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span

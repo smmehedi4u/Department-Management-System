@@ -22,17 +22,17 @@
                                 <div class="col-lg-4">
                                     <div class="card mb-4">
                                         <div class="card-body text-center ">
-                                            @if ($profile->image == null)
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                                                    alt="avatar" class="rounded-circle img-fluid"
-                                                    style="width: 150px;margin-left: 80px">
-                                            @else
+                                            @if ($profile && $profile->image)
                                                 <img src="{{ url('public/img/' . $profile->image) }}" alt="avatar"
                                                     class="rounded-circle img-fluid"
                                                     style="width: 150px;margin-left: 80px">
+                                            @else
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                                    alt="avatar" class="rounded-circle img-fluid"
+                                                    style="width: 150px;margin-left: 80px">
                                             @endif
                                             <h5 class="my-3">{{ $user->name }}</h5>
-                                            <p class="text-muted mb-1">{{ $profile->designation_name }}</p>
+                                            <p class="text-muted mb-1">{{ $profile && $profile->designation_name ? $profile->designation_name : 'No designation available'  }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                                     <p class="mb-0">Mobile</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p class="text-muted mb-0">{{ $profile->mobile }}</p>
+                                                    <p class="text-muted mb-0">{{ $profile && $profile->mobile ? $profile->mobile : 'No mobile number available'  }}</p>
                                                 </div>
                                             </div>
                                             <hr>
@@ -71,7 +71,7 @@
                                                     <p class="mb-0">Address</p>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p class="text-muted mb-0">{{ $profile->address }}</p>
+                                                    <p class="text-muted mb-0">{{ $profile && $profile->address ? $profile->address : 'No address available'  }}</p>
                                                 </div>
                                             </div>
                                         </div>

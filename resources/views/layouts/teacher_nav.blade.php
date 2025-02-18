@@ -27,7 +27,6 @@
                     <x-nav-link :href="route('teacher.publication.index')" :active="request()->routeIs('teacher.publication.index')">
                         {{ __('Publication') }}
                     </x-nav-link>
-
                 </div>
             </div>
 

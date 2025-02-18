@@ -41,6 +41,13 @@ Route::view('/admission', 'admission')->name('admission'); // Admission page
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
+// Route::post('/logout', function () {
+//     Auth::logout();
+//     request()->session()->invalidate();
+//     request()->session()->regenerateToken();
+//     return redirect('/');
+// })->name('logout');
+
 require __DIR__ . '/auth.php';
 
 Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(function () {
@@ -203,11 +210,24 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_not_student'])->
 Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->group(function () {
     Route::get('/', function (Request $request) {
 
+        if (!Auth::check()) {
+            return redirect()->route('login')->with("error", "Please log in first.");
+        }
+
         $sp = StdProfile::where("user_id", Auth::user()->id)->first();
+
+
+        if (!$sp) {
+            return back()->with("error", "No profile found for the logged-in user.");
+        }
+
         $today_class = Routine::join("subjects", "subjects.id", "=", "routines.subject_id")
             ->join("users", "users.id", "=", "routines.teacher_id")
             ->select("routines.*",  "subjects.name as sub_name", "users.name as teacher_name")
-            ->where("batch_id",  $sp->batch_id)->where("day", date("l"))->get();
+            ->where("batch_id",  $sp->batch_id)
+            ->where("day", date("l"))
+            ->get();
+
         $next_day_class = Routine::join("subjects", "subjects.id", "=", "routines.subject_id")
             ->join("users", "users.id", "=", "routines.teacher_id")
             ->select("routines.*", "subjects.name as sub_name", "users.name as teacher_name")
