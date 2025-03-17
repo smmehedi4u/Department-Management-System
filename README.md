@@ -4,7 +4,21 @@
 
 The Department Management System is a web application designed to streamline communication and collaboration between students and teachers within a department. The project allows users with different roles (Admin, Teacher, and Student) to interact based on role-specific permissions and features, enhancing the management of schedules, tasks, and publications.
 
+## Database Desgn
 
+![DMS](https://github.com/user-attachments/assets/1f5c0815-7986-4ea8-8c1f-8673f5bc0bb4)
+
+## Admin Dashboard
+
+<img width="1303" alt="admin" src="https://github.com/user-attachments/assets/150b6e53-ebac-490d-b143-829d36e76696" />
+
+## Teacher Dashboard
+
+<img width="1432" alt="teacher" src="https://github.com/user-attachments/assets/153d8e8e-0adf-4592-9a7b-028d2c781216" />
+
+## Student Dashboard
+
+<img width="1055" alt="student" src="https://github.com/user-attachments/assets/9eacdefd-177f-4194-b478-ffbb3e9be089" />
 
 
 ## Features
