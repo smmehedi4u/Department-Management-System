@@ -1,25 +1,27 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\BatchController;
-use App\Http\Controllers\NoticeController;
-use App\Http\Controllers\DesignationController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\ResultController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\RoutineController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PublicationController;
-use App\Http\Controllers\StdProfileController;
+use App\Models\Task;
 use App\Models\Routine;
 use App\Models\StdProfile;
-use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\ResultController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StdProfileController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\PublicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view("welcome");
 });
+
+Route::view('/about', 'about')->name('about');
+Route::view('/admission', 'admission')->name('admission');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
@@ -83,16 +88,6 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(
         Route::post('/edit/{id}', [EventController::class, 'update'])->name('update');
     });
 
-    // //Result
-    // Route::name("result.")->prefix('result')->group(function () {
-    //     Route::get('/', [ResultController::class, 'index'])->name('index');
-    //     Route::get('/create', [ResultController::class, 'create'])->name('create');
-    //     Route::post('/create', [ResultController::class, 'store'])->name('store');
-    //     Route::delete('/delete/{id}', [ResultController::class, 'destroy'])->name('destroy');
-    //     Route::get('/edit/{id}', [ResultController::class, 'edit'])->name('edit');
-    //     Route::post('/edit/{id}', [ResultController::class, 'update'])->name('update');
-    // });
-
     //Room
     Route::name("room.")->prefix('room')->group(function () {
         Route::get('/', [RoomController::class, 'index'])->name('index');
@@ -123,34 +118,31 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_admin'])->group(
         Route::post('/edit/{id}', [SubjectController::class, 'update'])->name('update');
     });
 
-    //Task
-    // Route::name("task.")->prefix('task')->group(function () {
-    //     Route::get('/', [TaskController::class, 'index'])->name('index');
-    //     Route::get('/create', [TaskController::class, 'create'])->name('create');
-    //     Route::post('/create', [TaskController::class, 'store'])->name('store');
-    //     Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
-    //     Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
-    //     Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
-    // });
+        //Task
+        Route::name("task.")->prefix('task')->group(function () {
+            Route::get('/', [TaskController::class, 'index'])->name('index');
+            Route::get('/create', [TaskController::class, 'create'])->name('create');
+            Route::post('/create', [TaskController::class, 'store'])->name('store');
+            Route::delete('/delete/{id}', [TaskController::class, 'destroy'])->name('destroy');
+            Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
+            Route::post('/edit/{id}', [TaskController::class, 'update'])->name('update');
+        });
+
+        //Result
+        Route::name("result.")->prefix('result')->group(function () {
+            Route::get('/', [ResultController::class, 'index'])->name('index');
+            Route::get('/create', [ResultController::class, 'create'])->name('create');
+            Route::post('/create', [ResultController::class, 'store'])->name('store');
+            Route::delete('/delete/{id}', [ResultController::class, 'destroy'])->name('destroy');
+            Route::get('/edit/{id}', [ResultController::class, 'edit'])->name('edit');
+            Route::post('/edit/{id}', [ResultController::class, 'update'])->name('update');
+        });
 
 });
 
 Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->group(function () {
-    Route::get('/', function (Request $request) {
 
-        $today_class = Routine::join("batches", "batches.id", "=", "routines.batch_id")
-            ->join("subjects", "subjects.id", "=", "routines.subject_id")
-            ->select("routines.*", "batches.name as batch_name", "subjects.name as sub_name")
-            ->where("teacher_id", Auth::user()->id)->where("day", date("l"))->get();
-        $next_day_class = Routine::join("batches", "batches.id", "=", "routines.batch_id")
-            ->join("subjects", "subjects.id", "=", "routines.subject_id")
-            ->select("routines.*", "batches.name as batch_name", "subjects.name as sub_name")
-            ->where("teacher_id", Auth::user()->id)->where("day", date("l", strtotime("+1day")))->get();
-        return view("teacher.teacher_home", compact("today_class", "next_day_class"));
-    })->name('home');
-
-    //Task
-
+    Route::get('/', [TeacherController::class, 'index'])->name('home');
 
     //Profile
     Route::name("profile.")->prefix('profile')->group(function () {
@@ -162,8 +154,6 @@ Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->
         Route::post('/edit', [ProfileController::class, 'update'])->name('update');
     });
 
-
-
     //Publication
     Route::name("publication.")->prefix('publication')->group(function () {
         Route::get('/', [PublicationController::class, 'index'])->name('index');
@@ -173,9 +163,6 @@ Route::name("teacher.")->prefix("teacher")->middleware(['auth', 'is_teacher'])->
         Route::get('/edit/{id}', [PublicationController::class, 'edit'])->name('edit');
         Route::post('/edit/{id}', [PublicationController::class, 'update'])->name('update');
     });
-});
-
-Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_not_student'])->group(function () {
     //Task
     Route::name("task.")->prefix('task')->group(function () {
         Route::get('/', [TaskController::class, 'index'])->name('index');
@@ -197,28 +184,11 @@ Route::name("admin.")->prefix("admin")->middleware(['auth', 'is_not_student'])->
     });
 });
 
+// Student Route
+
 Route::name("student.")->prefix("student")->middleware(['auth', 'is_student'])->group(function () {
-    Route::get('/', function (Request $request) {
 
-        $sp = StdProfile::where("user_id", Auth::user()->id)->first();
-        $today_class = Routine::join("subjects", "subjects.id", "=", "routines.subject_id")
-            ->join("users", "users.id", "=", "routines.teacher_id")
-            ->select("routines.*",  "subjects.name as sub_name", "users.name as teacher_name")
-            ->where("batch_id",  $sp->batch_id)->where("day", date("l"))->get();
-        $next_day_class = Routine::join("subjects", "subjects.id", "=", "routines.subject_id")
-            ->join("users", "users.id", "=", "routines.teacher_id")
-            ->select("routines.*", "subjects.name as sub_name", "users.name as teacher_name")
-            ->where("batch_id", $sp->batch_id)->where("day", date("l", strtotime("+1day")))->get();
-
-            $pending_task = Task::join("subjects", "subjects.id", "=", "tasks.subject_id")
-            ->select("tasks.*",  "subjects.name as sub_name")
-            ->where("batch_id",  $sp->batch_id)->where("end_date", ">=", date("Y-m-d"))->get();
-            return view("student.student_home", compact("today_class", "next_day_class", "pending_task"));
-    }
-    )->name('home');
-
-
-
+    Route::get('/', [StudentController::class, 'index'])->name('home');
 
     //Profile
     Route::name("profile.")->prefix('profile')->group(function () {

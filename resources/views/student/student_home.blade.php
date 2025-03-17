@@ -12,7 +12,9 @@
                     @if ($today_class)
                     <div class="relative overflow-x-auto mb-5 shadow-md sm:rounded-lg">
                         <table class="w-full mb-5 text-sm text-left text-gray-500 ">
-                            <caption><strong> Today Class </strong></caption>
+                            <caption class="text-lg font-semibold text-gray-700 bg-gray-100 p-3 rounded-t-md">
+                                Today Class
+                            </caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
 
                                 <tr>
@@ -37,10 +39,10 @@
                                 @foreach ($today_class as $routine)
                                 <tr class="bg-white border-b  ">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                       {{ $routine->teacher_name }}
+                                       {{ $routine->teacher->name ?? 'No teacher'}}
                                     </th>
                                     <td class="px-6 py-4">
-                                    {{ $routine->sub_name }}
+                                    {{ $routine->subject->name ?? 'No subject'}}
                                     </td>
                                     <td class="px-6 py-4">
                                     {{ $routine->day }}
@@ -60,9 +62,11 @@
                         @if ($next_day_class)
                         <hr>
 
-                        <div class="relative overflow-x-auto mb-5 shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left text-gray-500 ">
-                            <caption><strong>Next Day Class</strong></caption>
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm mb-5 text-left text-gray-500">
+                            <caption class="text-lg font-semibold text-gray-700 bg-gray-100 p-3 rounded-t-md">
+                                Next Day Class
+                            </caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
@@ -86,10 +90,10 @@
                                 @foreach ($next_day_class as $routine)
                                 <tr class="bg-white border-b  ">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                       {{ $routine->teacher_name }}
+                                        {{ $routine->teacher->name ?? 'No teacher'}}
                                     </th>
                                     <td class="px-6 py-4">
-                                    {{ $routine->sub_name }}
+                                        {{ $routine->subject->name ?? 'No subject'}}
                                     </td>
                                     <td class="px-6 py-4">
                                     {{ $routine->day }}
@@ -112,13 +116,17 @@
 
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 ">
-                            <caption><strong>Pending Task</strong></caption>
+                            <caption class="text-lg font-semibold text-gray-700 bg-gray-100 p-3 rounded-t-md mt-10">
+                                Pending Task
+                            </caption>
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
                                         Subject
                                     </th>
-                                    <th>Task</th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Task
+                                    </th>
                                     <th scope="col" class="px-6 py-3">
                                         Last Date
                                     </th>
@@ -128,9 +136,11 @@
                                 @foreach ($pending_task as $pt)
                                 <tr class="bg-white border-b  ">
                                     <td class="px-6 py-4">
-                                    {{ $pt->sub_name }}
+                                    {{ $pt->subject->name ?? 'No subject'}}
                                     </td>
-                                    <td>{{ $pt->details }}</td>
+                                    <td class="px-6 py-4">
+                                        {{ $pt->details }}
+                                    </td>
                                     <td class="px-6 py-4">
                                     {{ $pt->end_date }}
                                     </td>
