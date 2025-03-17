@@ -18,10 +18,10 @@
                     <x-nav-link :href="route('teacher.profile.index')" :active="request()->routeIs('teacher.profile.index')">
                         {{ __('Profile') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.task.index')" :active="request()->routeIs('admin.task.index')">
+                    <x-nav-link :href="route('teacher.task.index')" :active="request()->routeIs('teacher.task.index')">
                         {{ __('Task') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.result.index')" :active="request()->routeIs('admin.result.index')">
+                    <x-nav-link :href="route('teacher.result.index')" :active="request()->routeIs('teacher.result.index')">
                         {{ __('Result') }}
                     </x-nav-link>
                     <x-nav-link :href="route('teacher.publication.index')" :active="request()->routeIs('teacher.publication.index')">
@@ -91,10 +91,10 @@
             <x-responsive-nav-link :href="route('teacher.profile.index')" :active="request()->routeIs('teacher.profile.index')">
                 {{ __('Profile') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.task.index')" :active="request()->routeIs('admin.task.index')">
+            <x-responsive-nav-link :href="route('teacher.task.index')" :active="request()->routeIs('teacher.task.index')">
                 {{ __('Task') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.result.index')" :active="request()->routeIs('admin.result.index')">
+            <x-responsive-nav-link :href="route('teacher.result.index')" :active="request()->routeIs('teacher.result.index')">
                 {{ __('Result') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('teacher.publication.index')" :active="request()->routeIs('teacher.publication.index')">

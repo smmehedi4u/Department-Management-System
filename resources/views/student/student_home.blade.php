@@ -39,10 +39,10 @@
                                 @foreach ($today_class as $routine)
                                 <tr class="bg-white border-b  ">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                       {{ $routine->teacher_name }}
+                                       {{ $routine->teacher->name ?? 'No teacher'}}
                                     </th>
                                     <td class="px-6 py-4">
-                                    {{ $routine->sub_name }}
+                                    {{ $routine->subject->name ?? 'No subject'}}
                                     </td>
                                     <td class="px-6 py-4">
                                     {{ $routine->day }}
@@ -90,10 +90,10 @@
                                 @foreach ($next_day_class as $routine)
                                 <tr class="bg-white border-b  ">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                       {{ $routine->teacher_name }}
+                                        {{ $routine->teacher->name ?? 'No teacher'}}
                                     </th>
                                     <td class="px-6 py-4">
-                                    {{ $routine->sub_name }}
+                                        {{ $routine->subject->name ?? 'No subject'}}
                                     </td>
                                     <td class="px-6 py-4">
                                     {{ $routine->day }}
@@ -136,7 +136,7 @@
                                 @foreach ($pending_task as $pt)
                                 <tr class="bg-white border-b  ">
                                     <td class="px-6 py-4">
-                                    {{ $pt->sub_name }}
+                                    {{ $pt->subject->name ?? 'No subject'}}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $pt->details }}

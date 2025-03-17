@@ -39,10 +39,10 @@
                             @foreach ($today_class as $routine)
                             <tr class="bg-white border-b  ">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                   {{ $routine->batch_name }}
+                                   {{ $routine->batch->name }}
                                 </th>
                                 <td class="px-6 py-4">
-                                {{ $routine->sub_name }}
+                                {{ $routine->subject->name ?? 'No subject assigned'}}
                                 </td>
                                 <td class="px-6 py-4">
                                 {{ $routine->day }}
@@ -88,10 +88,10 @@
                             @foreach ($next_day_class as $routine)
                             <tr class="bg-white border-b  ">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                   {{ $routine->batch_name }}
+                                   {{ $routine->batch->name }}
                                 </th>
                                 <td class="px-6 py-4">
-                                {{ $routine->sub_name }}
+                                {{ $routine->subject->name }}
                                 </td>
                                 <td class="px-6 py-4">
                                 {{ $routine->day }}
