@@ -43,9 +43,13 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed'],
-            'role_id' => ['required', 'integer'],
-            'batch_id' => "required_if:role_id,0",
-            'designation_id' => "required_if:role_id,1",
+            'role_id' => ['required', 'integer', 'in:0,1'],
+            'batch_id' => ['required_if:role_id,0'],
+            'designation_id' => ['required_if:role_id,1'],
+        ], [
+            'role_id.in' => 'Only Student or Teacher can be selected.',
+            'batch_id.required_if' => 'Batch is required when role is Student.',
+            'designation_id.required_if' => 'Designation is required when role is Teacher.',
         ]);
 
         $user = User::create([
